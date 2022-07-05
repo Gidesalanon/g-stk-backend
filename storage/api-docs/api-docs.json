@@ -1,0 +1,3543 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "G-STK Back-End OpenApi  Documentation",
+        "description": "L5 Swagger OpenApi description",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/auth/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "description": "Login a user with username and password",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "description": "Logout a user",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/me": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "description": "Return logged in user information",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/password/email": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "description": "Send reset link Response",
+                "operationId": "App\\Http\\Controllers\\Api\\Auth\\ForgotPasswordController::sendResetLinkResponse",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/password/reset": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "description": "Send reset Response",
+                "operationId": "App\\Http\\Controllers\\Api\\Auth\\ResetPasswordController::sendResetResponse",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/email/resend": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "description": "Resend operation",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/email/verify/{id}/{hash}": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "description": "Verify operation",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "api/contacts": {
+            "get": {
+                "tags": [
+                    "Contacts"
+                ],
+                "summary": "Get list of contacts",
+                "description": "Returns list of contacts with associated resources(modules)",
+                "operationId": "getContactsList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ContactResource"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Contacts"
+                ],
+                "summary": "Store new contact",
+                "description": "Returns contact data",
+                "operationId": "storeContact",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreContactRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Contact"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "api/contacts/{id}": {
+            "get": {
+                "tags": [
+                    "Contacts"
+                ],
+                "summary": "Get contact information",
+                "description": "Returns contact data",
+                "operationId": "getContactById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Contact id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Contact"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Contacts"
+                ],
+                "summary": "Delete existing contact",
+                "description": "Deletes contact",
+                "operationId": "deleteContacts",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Contact id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "api/Contacts/{id}": {
+            "put": {
+                "tags": [
+                    "Contacts"
+                ],
+                "summary": "Update existing contact",
+                "description": "Returns updated contact data",
+                "operationId": "updateContact",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Contact id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateContactRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Contact"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/documentations": {
+            "get": {
+                "tags": [
+                    "Documentation"
+                ],
+                "description": "Return documentations' list",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DocumentationResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Documentation"
+                ],
+                "description": "Create documentation",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreDocumentationRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Documentation"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/documentations/{id}": {
+            "get": {
+                "tags": [
+                    "Documentation"
+                ],
+                "description": "Show Documentation",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Documentation"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Documentation"
+                ],
+                "description": "Update Documentation",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateDocumentationRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Documentation"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "api/documentations/{id}": {
+            "delete": {
+                "tags": [
+                    "Documentation"
+                ],
+                "summary": "Delete existing Documentation",
+                "description": "Deletes a Documentation ",
+                "operationId": "deleteDocumentation",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Documentation id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/fichiers": {
+            "get": {
+                "tags": [
+                    "Fichiers"
+                ],
+                "description": "Return fichiers' list",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FichierResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Fichiers"
+                ],
+                "description": "Create fichier",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreFichierRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Fichier"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/fichiers/{id}": {
+            "get": {
+                "tags": [
+                    "Fichiers"
+                ],
+                "description": "Show fichier",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Fichier"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Fichiers"
+                ],
+                "description": "Update fichier",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateFichierRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Fichier"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Fichiers"
+                ],
+                "description": "Delete fichier",
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "api/menus": {
+            "get": {
+                "tags": [
+                    "Menus"
+                ],
+                "summary": "Get list of menus",
+                "description": "Returns list of menus",
+                "operationId": "getMenusList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MenuResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Menus"
+                ],
+                "summary": "Store new menus",
+                "description": "Returns menu data",
+                "operationId": "storeMenu",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreMenuRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Menu"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "api/menus/{id}": {
+            "get": {
+                "tags": [
+                    "Menus"
+                ],
+                "summary": "Get menu information",
+                "description": "Returns menu data",
+                "operationId": "getMenuById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Menu id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Menu"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Menus"
+                ],
+                "summary": "Update existing menu",
+                "description": "Returns updated menu data",
+                "operationId": "updateMenu",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Menu id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateMenuRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Menu"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Menus"
+                ],
+                "summary": "Delete existing menu",
+                "description": "Deletes a record and returns no content",
+                "operationId": "deleteMenu",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Menu id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/modules": {
+            "get": {
+                "tags": [
+                    "Modules"
+                ],
+                "description": "Return modules' list",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ModuleResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Modules"
+                ],
+                "description": "Create module",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreModuleRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Module"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/modules/{id}": {
+            "get": {
+                "tags": [
+                    "Modules"
+                ],
+                "description": "Show Module",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Module"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Modules"
+                ],
+                "description": "Update Module",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateModuleRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Module"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "api/modules/{id}": {
+            "delete": {
+                "tags": [
+                    "Modules"
+                ],
+                "summary": "Delete existing Module",
+                "description": "Deletes a module ",
+                "operationId": "deleteModule",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Module id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "api/news": {
+            "get": {
+                "tags": [
+                    "News"
+                ],
+                "summary": "Get list of news",
+                "description": "Returns list of news",
+                "operationId": "getNewsList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NewsResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "News"
+                ],
+                "summary": "Store new news",
+                "description": "Returns news data",
+                "operationId": "storeNews",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreNewsRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/News"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "api/news/{id}": {
+            "get": {
+                "tags": [
+                    "News"
+                ],
+                "summary": "Get news information",
+                "description": "Returns news data",
+                "operationId": "getNewsById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "News id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/News"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "News"
+                ],
+                "summary": "Update existing news",
+                "description": "Returns updated news data",
+                "operationId": "updateNews",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "News id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateNewsRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/News"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "News"
+                ],
+                "summary": "Delete existing news",
+                "description": "Deletes a record and returns no content",
+                "operationId": "deleteNews",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "News id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "api/pages": {
+            "get": {
+                "tags": [
+                    "Pages"
+                ],
+                "summary": "Get list of pages",
+                "description": "Returns list of pages with associated resources(users, modules)",
+                "operationId": "getPagesList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/PageResource"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Pages"
+                ],
+                "summary": "Store new page",
+                "description": "Returns pages data",
+                "operationId": "storePages",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StorePageRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Page"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "api/pages/{id}": {
+            "get": {
+                "tags": [
+                    "Pages"
+                ],
+                "summary": "Get page information",
+                "description": "Returns page data",
+                "operationId": "getPageById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Page id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Page"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Pages"
+                ],
+                "summary": "Update existing page",
+                "description": "Returns updated page data",
+                "operationId": "updatePage",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Page id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdatePageRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Page"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Pages"
+                ],
+                "summary": "Delete existing page",
+                "description": "Deletes a record and returns no content",
+                "operationId": "deletePage",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Page id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "api/entreprises": {
+            "get": {
+                "tags": [
+                    "Entreprises"
+                ],
+                "summary": "Get list of entreprises",
+                "description": "Returns list of entreprises",
+                "operationId": "getEntreprisesList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EntrepriseResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Entreprises"
+                ],
+                "summary": "Store new entreprise",
+                "description": "Returns entreprise data",
+                "operationId": "storeEntreprise",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreEntrepriseRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Entreprise"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "api/entreprises/{id}": {
+            "get": {
+                "tags": [
+                    "Entreprises"
+                ],
+                "summary": "Get entreprise information",
+                "description": "Returns entreprise data",
+                "operationId": "getEntrepriseById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Entreprise id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Entreprise"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Entreprises"
+                ],
+                "summary": "Update existing entreprise",
+                "description": "Returns updated entreprise data",
+                "operationId": "updateEntreprise",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Entreprise id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateEntrepriseRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Entreprise"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Entreprises"
+                ],
+                "summary": "Delete existing entreprise",
+                "description": "Deletes a record and returns no content",
+                "operationId": "deleteEntreprise",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Entreprise id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "api/users": {
+            "get": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Get list of users",
+                "description": "Return users' list",
+                "operationId": "getUsersList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/UserResource"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Store new user",
+                "description": "Returns users data",
+                "operationId": "storeUser",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreUserRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "api/users/{id}": {
+            "get": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Get user information",
+                "description": "Returns user data",
+                "operationId": "getUserById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Update existing user",
+                "description": "Returns updated user data",
+                "operationId": "updateUser",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateUserRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Delete existing user",
+                "description": "Deletes an user and returns no content",
+                "operationId": "deleteUser",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "api/weblinks": {
+            "get": {
+                "tags": [
+                    "Weblinks"
+                ],
+                "summary": "Get list of weblinks",
+                "description": "Returns list of weblinks with associated resources(modules)",
+                "operationId": "getWeblinksList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/WeblinkResource"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Weblinks"
+                ],
+                "summary": "Store new weblink",
+                "description": "Returns weblinks data",
+                "operationId": "storeWeblinks",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreWeblinkRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Weblink"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "api/weblinks/{id}": {
+            "get": {
+                "tags": [
+                    "Weblinks"
+                ],
+                "summary": "Get weblink information",
+                "description": "Returns weblink data",
+                "operationId": "getWeblinkById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Weblink id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Weblink"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Weblinks"
+                ],
+                "summary": "Update existing weblink",
+                "description": "Returns updated weblink data",
+                "operationId": "updateWeblink",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Weblink id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateWeblinkRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Weblink"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Weblinks"
+                ],
+                "summary": "Delete existing weblink",
+                "description": "Deletes weblink",
+                "operationId": "deleteWeblink",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Weblink id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "AuthResponse": {
+                "title": "AuthResponse",
+                "description": "AuthResponse",
+                "properties": {
+                    "access_token": {
+                        "title": "access_token",
+                        "type": "string"
+                    },
+                    "token_type": {
+                        "title": "token_type",
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "AuthResponse"
+                }
+            },
+            "Contact": {
+                "title": "Contact",
+                "description": "Contact model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "name": {
+                        "title": "Name",
+                        "description": "Name of the new contact",
+                        "type": "string",
+                        "example": "A nice Contact"
+                    },
+                    "autres": {
+                        "title": "Autres",
+                        "description": "Autres of the new contact",
+                        "type": "string",
+                        "example": "A nice Contact"
+                    },
+                    "module_id": {
+                        "title": "Module ID",
+                        "description": "Module's id of the new Contact",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "public": {
+                        "title": "Public",
+                        "description": "To display or not a contact",
+                        "type": "boolean",
+                        "example": "0"
+                    },
+                    "created_at": {
+                        "title": "Created at",
+                        "description": "Created at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    },
+                    "updated_at": {
+                        "title": "Updated at",
+                        "description": "Updated at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Contact"
+                }
+            },
+            "Documentation": {
+                "title": "Documentation",
+                "description": "Documentation model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "title": {
+                        "title": "title",
+                        "type": "string"
+                    },
+                    "fichier_id": {
+                        "title": "fichier_id",
+                        "description": "For access_link",
+                        "type": "integer"
+                    },
+                    "public": {
+                        "title": "public",
+                        "type": "boolean"
+                    },
+                    "user_id": {
+                        "title": "user_id",
+                        "type": "integer"
+                    },
+                    "module_id": {
+                        "title": "module_id",
+                        "type": "integer"
+                    },
+                    "type_doc": {
+                        "title": "type_doc",
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "title": "Created at",
+                        "description": "Created at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    },
+                    "updated_at": {
+                        "title": "Updated at",
+                        "description": "Updated at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Documentation"
+                }
+            },
+            "Fichier": {
+                "title": "Fichier",
+                "description": "Fichier model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "filename": {
+                        "title": "filename",
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "title": "Created at",
+                        "description": "Created at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    },
+                    "updated_at": {
+                        "title": "Updated at",
+                        "description": "Updated at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Fichier"
+                }
+            },
+            "Menu": {
+                "title": "Menu",
+                "description": "Menu model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "title": {
+                        "title": "Title",
+                        "type": "string"
+                    },
+                    "target_link": {
+                        "title": "Targetlink",
+                        "type": "string",
+                        "example": "http://schimmel.com/"
+                    },
+                    "public": {
+                        "title": "Public",
+                        "type": "boolean"
+                    },
+                    "created_at": {
+                        "title": "Created at",
+                        "description": "Created at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    },
+                    "updated_at": {
+                        "title": "Updated at",
+                        "description": "Updated at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    },
+                    "parent_id": {
+                        "title": "Parent id",
+                        "description": "Recursivity of menu id",
+                        "type": "integer"
+                    },
+                    "module_id": {
+                        "title": "Module's id",
+                        "description": "Id of module",
+                        "type": "integer"
+                    },
+                    "page_id": {
+                        "title": "Page's id",
+                        "description": "Id of page",
+                        "type": "integer"
+                    },
+                    "Menu_id": {
+                        "title": "Menu's id",
+                        "description": "Id of Menu",
+                        "type": "integer"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Menu"
+                }
+            },
+            "Module": {
+                "title": "Module",
+                "description": "Module model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "name": {
+                        "title": "name",
+                        "type": "string"
+                    },
+                    "public": {
+                        "title": "public",
+                        "type": "boolean"
+                    },
+                    "deleted": {
+                        "title": "deleted",
+                        "type": "boolean"
+                    },
+                    "type_module": {
+                        "title": "type_module",
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "title": "Created at",
+                        "description": "Created at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    },
+                    "updated_at": {
+                        "title": "Updated at",
+                        "description": "Updated at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Module"
+                }
+            },
+            "News": {
+                "title": "News",
+                "description": "News model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "title": {
+                        "title": "Title",
+                        "type": "string"
+                    },
+                    "public": {
+                        "title": "Public",
+                        "type": "boolean"
+                    },
+                    "permalink": {
+                        "title": "Permalink",
+                        "type": "string",
+                        "example": "http://schimmel.com/"
+                    },
+                    "fichier_id": {
+                        "title": "fichier_id",
+                        "description": "For image",
+                        "type": "integer"
+                    },
+                    "content": {
+                        "title": "Content",
+                        "type": "string"
+                    },
+                    "type": {
+                        "title": "Type",
+                        "description": "Type of New"
+                    },
+                    "created_at": {
+                        "title": "Created at",
+                        "description": "Created at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    },
+                    "updated_at": {
+                        "title": "Updated at",
+                        "description": "Updated at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    },
+                    "module_id": {
+                        "title": "Module's id",
+                        "description": "Id of module",
+                        "type": "integer"
+                    },
+                    "user_id": {
+                        "title": "User's id",
+                        "description": "Id of User",
+                        "type": "integer"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "News"
+                }
+            },
+            "Page": {
+                "title": "Page",
+                "description": "Page model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "title": {
+                        "title": "Title",
+                        "description": "Title of the new page",
+                        "type": "string",
+                        "example": "A nice Page"
+                    },
+                    "permalink": {
+                        "title": "Permalink",
+                        "description": "Permalink of the new page",
+                        "type": "string",
+                        "example": "This is new Page's Permalink"
+                    },
+                    "content": {
+                        "title": "Content",
+                        "description": "Content of the new page",
+                        "type": "string",
+                        "example": "A nice Page"
+                    },
+                    "public": {
+                        "title": "Public",
+                        "description": "Public of the new page",
+                        "type": "boolean",
+                        "example": "TTo display or not a page"
+                    },
+                    "created_at": {
+                        "title": "Created at",
+                        "description": "Created at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    },
+                    "fichier_id": {
+                        "title": "fichier_id",
+                        "description": "For image",
+                        "type": "integer"
+                    },
+                    "updated_at": {
+                        "title": "Updated at",
+                        "description": "Updated at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    },
+                    "user_id": {
+                        "title": "User ID",
+                        "description": "User's id of the new Page",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "module_id": {
+                        "title": "Module ID",
+                        "description": "Module's id of the new Page",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Page"
+                }
+            },
+            "Entreprise": {
+                "title": "Entreprise",
+                "description": "Entreprise model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "name": {
+                        "title": "Name",
+                        "type": "string"
+                    },
+                    "public": {
+                        "title": "Public",
+                        "type": "boolean"
+                    },
+                    "website_link": {
+                        "title": "Websitelink",
+                        "type": "string",
+                        "example": "http://schimmel.com/"
+                    },
+                    "fichier_id": {
+                        "title": "fichier_id",
+                        "description": "For logo",
+                        "type": "integer"
+                    },
+                    "presentation": {
+                        "title": "Presentation",
+                        "type": "string"
+                    },
+                    "module_entreprise_id": {
+                        "title": "Moduleentrepriseid",
+                        "description": "Module Entreprise Id",
+                        "type": "integer"
+                    },
+                    "created_at": {
+                        "title": "Created at",
+                        "description": "Created at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    },
+                    "updated_at": {
+                        "title": "Updated at",
+                        "description": "Updated at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    },
+                    "module_id": {
+                        "title": "Module's id",
+                        "description": "Id of module",
+                        "type": "integer"
+                    },
+                    "user_id": {
+                        "title": "User's id",
+                        "description": "Id of User",
+                        "type": "integer"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Entreprise"
+                }
+            },
+            "User": {
+                "title": "User",
+                "description": "User model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "username": {
+                        "title": "Username",
+                        "type": "string"
+                    },
+                    "email": {
+                        "title": "Email",
+                        "type": "string"
+                    },
+                    "password": {
+                        "title": "Password",
+                        "type": "string"
+                    },
+                    "firstname": {
+                        "title": "Firstname",
+                        "type": "string"
+                    },
+                    "lastname": {
+                        "title": "Lastname",
+                        "type": "string"
+                    },
+                    "public": {
+                        "title": "Public",
+                        "type": "boolean"
+                    },
+                    "created_at": {
+                        "title": "Created at",
+                        "description": "Created at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    },
+                    "updated_at": {
+                        "title": "Updated at",
+                        "description": "Updated at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "User"
+                }
+            },
+            "Weblink": {
+                "title": "Weblink",
+                "description": "Weblink model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "name": {
+                        "title": "Name",
+                        "type": "string"
+                    },
+                    "access_link": {
+                        "title": "Access_link",
+                        "type": "string"
+                    },
+                    "module_id": {
+                        "title": "Module ID",
+                        "description": "Module's id of the new weblink",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "public": {
+                        "title": "Public",
+                        "description": "To display or not a weblink",
+                        "type": "boolean",
+                        "example": "1"
+                    },
+                    "created_at": {
+                        "title": "Created at",
+                        "description": "Created at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    },
+                    "updated_at": {
+                        "title": "Updated at",
+                        "description": "Updated at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Weblink"
+                }
+            },
+            "StoreContactRequest": {
+                "title": "Store Contact request",
+                "description": "Store Contact request body data",
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "type": "string"
+                    },
+                    "autres": {
+                        "title": "autres",
+                        "type": "string"
+                    },
+                    "public": {
+                        "title": "public",
+                        "type": "boolean"
+                    },
+                    "module_id": {
+                        "title": "module_id",
+                        "description": "Module's is for contact",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            },
+            "StoreDocumentationRequest": {
+                "title": "Store Documentation request",
+                "description": "Store Documentation request body data",
+                "properties": {
+                    "title": {
+                        "title": "title",
+                        "type": "string"
+                    },
+                    "fichier": {
+                        "title": "fichier",
+                        "description": "For access_link",
+                        "type": "string"
+                    },
+                    "public": {
+                        "title": "public",
+                        "type": "boolean"
+                    },
+                    "user_id": {
+                        "title": "user_id",
+                        "description": "User's id of the new contact",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "module_id": {
+                        "title": "module_id",
+                        "description": "Module's id of the new contact",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "type_doc": {
+                        "title": "type_doc",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "StoreFichierRequest": {
+                "title": "Store Fichier request",
+                "description": "Store Fichier request body data",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "filename": {
+                        "title": "filename",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "StoreMenuRequest": {
+                "title": "Store Menu request",
+                "description": "Store Menu request body data",
+                "properties": {
+                    "title": {
+                        "title": "Title",
+                        "type": "string"
+                    },
+                    "target_link": {
+                        "title": "Targetlink",
+                        "type": "string",
+                        "example": "http://schimmel.com/"
+                    },
+                    "public": {
+                        "title": "Public",
+                        "type": "boolean"
+                    },
+                    "parent_id": {
+                        "title": "Parent id",
+                        "description": "Recursivity of menu id",
+                        "type": "integer"
+                    },
+                    "module_id": {
+                        "title": "Module's id",
+                        "description": "Id of module",
+                        "type": "integer"
+                    },
+                    "user_id": {
+                        "title": "User's id",
+                        "description": "Id of User",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "StoreModuleRequest": {
+                "title": "Store Module request",
+                "description": "Store Module request body data",
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "type": "string"
+                    },
+                    "type_module": {
+                        "title": "type_module",
+                        "description": "Type_module",
+                        "type": "string",
+                        "format": "int64",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            },
+            "StoreNewsRequest": {
+                "title": "Store News request",
+                "description": "Store News request body data",
+                "properties": {
+                    "title": {
+                        "title": "Title",
+                        "type": "string"
+                    },
+                    "public": {
+                        "title": "Public",
+                        "type": "boolean"
+                    },
+                    "permalink": {
+                        "title": "Permalink",
+                        "type": "string",
+                        "example": "http://schimmel.com/"
+                    },
+                    "fichier_id": {
+                        "title": "fichier_id",
+                        "description": "For image",
+                        "type": "integer"
+                    },
+                    "content": {
+                        "title": "Content",
+                        "type": "string"
+                    },
+                    "type": {
+                        "title": "Type",
+                        "description": "Type of New"
+                    },
+                    "module_id": {
+                        "title": "Module's id",
+                        "description": "Id of module",
+                        "type": "integer"
+                    },
+                    "user_id": {
+                        "title": "User's id",
+                        "description": "Id of User",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "StorePageRequest": {
+                "title": "Store Page request",
+                "description": "Store Page request body data",
+                "properties": {
+                    "title": {
+                        "title": "title",
+                        "type": "string"
+                    },
+                    "permalink": {
+                        "title": "permalink",
+                        "type": "string"
+                    },
+                    "content": {
+                        "title": "content",
+                        "type": "string"
+                    },
+                    "public": {
+                        "title": "public",
+                        "type": "boolean"
+                    },
+                    "fichier_id": {
+                        "title": "fichier_id",
+                        "description": "For image",
+                        "type": "integer"
+                    },
+                    "Page_id": {
+                        "title": "Page_id",
+                        "description": "Page's id of the new contact",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "module_id": {
+                        "title": "role_id",
+                        "description": "Module's id of the new contact",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            },
+            "StoreEntrepriseRequest": {
+                "title": "Store Entreprise request",
+                "description": "Store Entreprise request body data",
+                "properties": {
+                    "name": {
+                        "title": "Name",
+                        "type": "string"
+                    },
+                    "public": {
+                        "title": "Public",
+                        "type": "boolean"
+                    },
+                    "website_link": {
+                        "title": "Websitelink",
+                        "type": "string",
+                        "example": "http://schimmel.com/"
+                    },
+                    "fichier_id": {
+                        "title": "fichier_id",
+                        "description": "For logo",
+                        "type": "integer"
+                    },
+                    "presentation": {
+                        "title": "Presentation",
+                        "type": "string"
+                    },
+                    "module_entreprise_id": {
+                        "title": "Moduleentrepriseid",
+                        "description": "Module Entreprise Id",
+                        "type": "integer"
+                    },
+                    "module_id": {
+                        "title": "Module's id",
+                        "description": "Id of module",
+                        "type": "integer"
+                    },
+                    "user_id": {
+                        "title": "User's id",
+                        "description": "Id of User",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "StoreUserRequest": {
+                "title": "Store User request",
+                "description": "Store User request body data",
+                "properties": {
+                    "username": {
+                        "title": "username",
+                        "type": "string"
+                    },
+                    "email": {
+                        "title": "email",
+                        "type": "string"
+                    },
+                    "role_id": {
+                        "title": "role_id",
+                        "description": "Role's id of the new user",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            },
+            "StoreWeblinkRequest": {
+                "title": "Store Weblink request",
+                "description": "Store Weblink request body data",
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "type": "string"
+                    },
+                    "access_link": {
+                        "title": "access_link",
+                        "type": "string"
+                    },
+                    "public": {
+                        "title": "public",
+                        "type": "boolean"
+                    },
+                    "module_id": {
+                        "title": "module_id",
+                        "description": "Module's is for Weblink",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateContactRequest": {
+                "title": "Update Contact request",
+                "description": "Update Contact request body data",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "type": "string"
+                    },
+                    "autres": {
+                        "title": "autres",
+                        "type": "string"
+                    },
+                    "public": {
+                        "title": "public",
+                        "type": "boolean"
+                    },
+                    "module_id": {
+                        "title": "module_id",
+                        "description": "Module's is for contact",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateDocumentationRequest": {
+                "title": "Update Documentation request",
+                "description": "Update Documentation request body data",
+                "properties": {
+                    "title": {
+                        "title": "title",
+                        "type": "string"
+                    },
+                    "fichier": {
+                        "title": "fichier",
+                        "type": "string"
+                    },
+                    "public": {
+                        "title": "public",
+                        "description": "For access_link",
+                        "type": "boolean"
+                    },
+                    "user_id": {
+                        "title": "user_id",
+                        "description": "User's id of the new contact",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "module_id": {
+                        "title": "module_id",
+                        "description": "Module's id of the new contact",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "type_doc": {
+                        "title": "type_doc",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateFichierRequest": {
+                "title": "Update Fichier request",
+                "description": "Update Fichier request body data",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "filename": {
+                        "title": "filename",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateMenuRequest": {
+                "title": "Update Menu request",
+                "description": "Update Menu request body data",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "title": {
+                        "title": "Title",
+                        "type": "string"
+                    },
+                    "target_link": {
+                        "title": "Targetlink",
+                        "type": "string",
+                        "example": "http://schimmel.com/"
+                    },
+                    "public": {
+                        "title": "Public",
+                        "type": "boolean"
+                    },
+                    "parent_id": {
+                        "title": "Parent id",
+                        "description": "Recursivity of menu id",
+                        "type": "integer"
+                    },
+                    "module_id": {
+                        "title": "Module's id",
+                        "description": "Id of module",
+                        "type": "integer"
+                    },
+                    "user_id": {
+                        "title": "User's id",
+                        "description": "Id of User",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateModuleRequest": {
+                "title": "Update Module request",
+                "description": "Update Module request body data",
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "type": "string"
+                    },
+                    "type_module": {
+                        "title": "type_module",
+                        "description": "Type_module",
+                        "type": "string",
+                        "format": "int64",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateNewsRequest": {
+                "title": "Update News request",
+                "description": "Update News request body data",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "title": {
+                        "title": "Title",
+                        "type": "string"
+                    },
+                    "public": {
+                        "title": "Public",
+                        "type": "boolean"
+                    },
+                    "permalink": {
+                        "title": "Permalink",
+                        "type": "string",
+                        "example": "http://schimmel.com/"
+                    },
+                    "fichier_id": {
+                        "title": "fichier_id",
+                        "description": "For image",
+                        "type": "integer"
+                    },
+                    "content": {
+                        "title": "Content",
+                        "type": "string"
+                    },
+                    "type": {
+                        "title": "Type",
+                        "description": "Type of New"
+                    },
+                    "module_id": {
+                        "title": "Module's id",
+                        "description": "Id of module",
+                        "type": "integer"
+                    },
+                    "user_id": {
+                        "title": "User's id",
+                        "description": "Id of User",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdatePageRequest": {
+                "title": "Update Page request",
+                "description": "Update Page request body data",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "title": {
+                        "title": "title",
+                        "type": "string"
+                    },
+                    "permalink": {
+                        "title": "permalink",
+                        "type": "string"
+                    },
+                    "content": {
+                        "title": "content",
+                        "type": "string"
+                    },
+                    "public": {
+                        "title": "public",
+                        "type": "boolean"
+                    },
+                    "fichier_id": {
+                        "title": "fichier_id",
+                        "description": "For image",
+                        "type": "integer"
+                    },
+                    "Page_id": {
+                        "title": "Page_id",
+                        "description": "Page's id of the new contact",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "module_id": {
+                        "title": "role_id",
+                        "description": "Module's id of the new contact",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateEntrepriseRequest": {
+                "title": "Update Entreprise request",
+                "description": "Update Entreprise request body data",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "title": "Name",
+                        "type": "string"
+                    },
+                    "public": {
+                        "title": "Public",
+                        "type": "boolean"
+                    },
+                    "website_link": {
+                        "title": "Websitelink",
+                        "type": "string",
+                        "example": "http://schimmel.com/"
+                    },
+                    "fichier_id": {
+                        "title": "fichier_id",
+                        "description": "For logo",
+                        "type": "integer"
+                    },
+                    "presentation": {
+                        "title": "Presentation",
+                        "type": "string"
+                    },
+                    "module_entreprise_id": {
+                        "title": "Moduleentrepriseid",
+                        "description": "Module Entreprise Id",
+                        "type": "integer"
+                    },
+                    "module_id": {
+                        "title": "Module's id",
+                        "description": "Id of module",
+                        "type": "integer"
+                    },
+                    "user_id": {
+                        "title": "User's id",
+                        "description": "Id of User",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateUserRequest": {
+                "title": "Update User request",
+                "description": "Update User request body data",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "username": {
+                        "title": "username",
+                        "type": "string"
+                    },
+                    "email": {
+                        "title": "email",
+                        "type": "string"
+                    },
+                    "role_id": {
+                        "title": "role_id",
+                        "description": "Role's id of the new user",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateWeblinkRequest": {
+                "title": "Update Weblink request",
+                "description": "Update Weblink request body data",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "type": "string"
+                    },
+                    "access_link": {
+                        "title": "access_link",
+                        "type": "string"
+                    },
+                    "public": {
+                        "title": "public",
+                        "type": "boolean"
+                    },
+                    "module_id": {
+                        "title": "module_id",
+                        "description": "Module's is for Weblink",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            },
+            "ContactResource": {
+                "title": "Contact Resource",
+                "description": "Contact resource",
+                "properties": {
+                    "data": {
+                        "title": "Data",
+                        "description": "Data wrapper",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Contact"
+                        }
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "ContactResource"
+                }
+            },
+            "DocumentationResource": {
+                "title": "Documentation Resource",
+                "description": "Documentation resource",
+                "properties": {
+                    "data": {
+                        "title": "Data",
+                        "description": "Data wrapper",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Documentation"
+                        }
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "DocumentationResource"
+                }
+            },
+            "FichierResource": {
+                "title": "Fichier Resource",
+                "description": "Fichier resource",
+                "properties": {
+                    "data": {
+                        "title": "Data",
+                        "description": "Data wrapper",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Fichier"
+                        }
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "FichierResource"
+                }
+            },
+            "MenuResource": {
+                "title": "Menu Resource",
+                "description": "Menu resource",
+                "properties": {
+                    "data": {
+                        "title": "Data",
+                        "description": "Data wrapper",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Menu"
+                        }
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "MenuResource"
+                }
+            },
+            "ModuleResource": {
+                "title": "Module Resource",
+                "description": "Module resource",
+                "properties": {
+                    "data": {
+                        "title": "Data",
+                        "description": "Data wrapper",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Module"
+                        }
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "ModuleResource"
+                }
+            },
+            "NewsResource": {
+                "title": "News Resource",
+                "description": "News resource",
+                "properties": {
+                    "data": {
+                        "title": "Data",
+                        "description": "Data wrapper",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/News"
+                        }
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "NewsResource"
+                }
+            },
+            "PageResource": {
+                "title": "Page Resource",
+                "description": "Page resource",
+                "properties": {
+                    "data": {
+                        "title": "Data",
+                        "description": "Data wrapper",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Page"
+                        }
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "PageResource"
+                }
+            },
+            "EntrepriseResource": {
+                "title": "Entreprise Resource",
+                "description": "Entreprise resource",
+                "properties": {
+                    "data": {
+                        "title": "Data",
+                        "description": "Data wrapper",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Entreprise"
+                        }
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "EntrepriseResource"
+                }
+            },
+            "UserResource": {
+                "title": "User Resource",
+                "description": "User resource",
+                "properties": {
+                    "data": {
+                        "title": "Data",
+                        "description": "Data wrapper",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/User"
+                        }
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "UserResource"
+                }
+            },
+            "WeblinkResource": {
+                "title": "Weblink Resource",
+                "description": "Weblink resource",
+                "properties": {
+                    "data": {
+                        "title": "Data",
+                        "description": "Data wrapper",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Weblink"
+                        }
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "WeblinkResource"
+                }
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}
