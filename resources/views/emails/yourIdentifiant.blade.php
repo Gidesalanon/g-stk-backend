@@ -10,8 +10,8 @@
     <h2 style="color:green"></h2>
     <p>Veuillez voir içi vos identifiants de connexion à G-STK ADMIN :</p>
 
-      <p> <strong>Nom d'utilisateur :</strong> {{ $paddsaAccount['username'] }} </p>
-     <p> <strong>Mot de passe :</strong>  {{ $paddsaAccount['password'] }} </p>
+      <p> <strong>Nom d'utilisateur :</strong> {{ $gstkAccount['username'] }} </p>
+      <p> <strong>Mot de passe :</strong>  {{ $gstkAccount['password'] }} </p>
 
     <footer style="background-color:green; color:white; width:50%">
         <sapan style="color:white">G-STK Admin</span>
