@@ -48,6 +48,7 @@ return [
             'use_bom'                => false,
             'include_separator_line' => false,
             'excel_compatibility'    => false,
+            'output_encoding'        => '',
         ],
 
         /*
@@ -97,7 +98,7 @@ return [
         | ignored by enabling the setting ignore_empty to true.
         |
         */
-        'ignore_empty' => true,
+        'ignore_empty' => false,
 
         /*
         |--------------------------------------------------------------------------
@@ -121,7 +122,7 @@ return [
         |
         */
         'csv'         => [
-            'delimiter'        => ',',
+            'delimiter'        => null,
             'enclosure'        => '"',
             'escape_character' => '\\',
             'contiguous'       => false,
@@ -239,7 +240,7 @@ return [
         |
         */
         'batch'     => [
-            'memory_limit' => 160000,
+            'memory_limit' => 60000,
         ],
 
         /*
@@ -276,6 +277,9 @@ return [
     */
     'transactions' => [
         'handler' => 'db',
+        'db'      => [
+            'connection' => null,
+        ],
     ],
 
     'temporary_files' => [
@@ -289,7 +293,7 @@ return [
         | storing reading or downloading. Here you can customize that path.
         |
         */
-        'local_path'          => storage_path('framework/laravel-excel'),
+        'local_path'          => storage_path('framework/cache/laravel-excel'),
 
         /*
         |--------------------------------------------------------------------------
