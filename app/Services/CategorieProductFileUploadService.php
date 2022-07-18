@@ -8,7 +8,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-class ProjetFileUploadService
+class CategorieProductFileUploadService
 {
     public function create(array $data)
     {
@@ -29,7 +29,7 @@ class ProjetFileUploadService
 
     public function save(UploadedFile $file)
     {
-        $filename = Storage::disk('public')->putFile('projets', $file);
+        $filename = Storage::disk('public')->putFile('categorieProducts', $file);
 
         // returns Intervention\Image\Image
        // $resizefile = Image::make(public_path($filename))->fit(1752,637);
@@ -45,7 +45,7 @@ class ProjetFileUploadService
 
     public function replace(UploadedFile $file, Fichier $fichier)
     {
-        $filename = Storage::disk('public')->putFile('projets', $file);
+        $filename = Storage::disk('public')->putFile('categorieProducts', $file);
 
         $fichier->deleteOnDisk()->update([
             'filename' => $filename

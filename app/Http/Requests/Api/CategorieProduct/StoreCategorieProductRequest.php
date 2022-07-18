@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Api\Entreprise;
+namespace App\Http\Requests\Api\CategorieProduct;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreEntrepriseRequest extends FormRequest
+class StoreCategorieProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,9 +26,8 @@ class StoreEntrepriseRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'min:2',],
             'fichier' => ['required', 'file'],
-            'presentation' => ['nullable', 'string'],
+            'description' => ['nullable', 'string'],
             'public' => [ 'boolean'],
-            'deleted' => [ 'boolean'],
         ];
     }
 }

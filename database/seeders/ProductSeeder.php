@@ -2,12 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Contact;
+use App\Models\Product;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Eloquent\Factories;
 
-
-class ContactSeeder extends Seeder
+class ProductSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,8 +14,8 @@ class ContactSeeder extends Seeder
      */
     public function run()
     {
-        Contact::factory()
-        ->times(5)
+        Product::factory()
+        ->times(15)
             ->create();
     }
 }

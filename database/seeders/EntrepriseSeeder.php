@@ -15,7 +15,7 @@ class EntrepriseSeeder extends Seeder
     public function run()
     {
         Entreprise::factory()
-        ->times(10)
+        ->times(5)
             ->create();
     }
 }

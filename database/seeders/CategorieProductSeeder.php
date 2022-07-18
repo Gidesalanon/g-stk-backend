@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\CategorieProduct;
 use Illuminate\Database\Seeder;
-use App\Models\Projet;
-use Illuminate\Database\Eloquent\Factories;
 
-class ProjetSeeder extends Seeder
+class CategorieProductSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,8 +14,8 @@ class ProjetSeeder extends Seeder
      */
     public function run()
     {
-        Projet::factory()
-        ->times(50)
-        ->create();
+        CategorieProduct::factory()
+        ->times(5)
+            ->create();
     }
 }
