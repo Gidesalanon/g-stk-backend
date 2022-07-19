@@ -37,7 +37,7 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
         'prefix' => 'auth'
     ], function () {
         Route::post('login', [AuthController::class, 'login'])->name('login');
-         Route::post('forgotPassword', [ForgotPasswordController::class, 'forgotPassword'])->name('forgotPassword');
+        Route::post('forgotPassword', [ForgotPasswordController::class, 'forgotPassword'])->name('forgotPassword');
         Route::post('logout', [AuthController::class, 'logout']);
         Route::get('me', [AuthController::class, 'me']);
 // Password reset link request routes...
@@ -63,7 +63,8 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
         
         Route::apiResource('fichiers', FichiersController::class);
         Route::apiResource('entreprises', EntrepriseController::class);
-        Route::apiResource('categorieProduct', CategorieProductController::class);
+        Route::apiResource('categorie_produits', CategorieProductController::class);
+        Route::apiResource('produits', ProductController::class);
         
         Route::apiResource('settings', SettingController::class);
         

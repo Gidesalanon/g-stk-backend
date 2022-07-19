@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 /**
  * Trait documentationFilter.
  */
-trait entreprisesFilter
+trait categorieProductsFilter
 {
     /**
      * @param \Illuminate\Database\Eloquent\Builder $builder
@@ -21,9 +21,10 @@ trait entreprisesFilter
                         ->orderByDesc('name');
     }
 
-    public function presentation(Builder $builder, $value)
+    public function description(Builder $builder, $value)
     {
-        return $builder->where('presentation', 'like', '%'.$value.'%')
-                        ->orderByDesc('presentation');
+        return $builder->where('description', 'like', '%'.$value.'%')
+                        ->orderByDesc('description');
     }
+    
 }

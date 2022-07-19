@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\User;
 use App\Models\Fichier;
+use App\Models\CategorieProduct;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CategorieProductFactory extends Factory

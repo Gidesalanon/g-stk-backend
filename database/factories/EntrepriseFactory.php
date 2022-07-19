@@ -24,7 +24,6 @@ class EntrepriseFactory extends Factory
      */
     public function definition()
     {
-      $module = Module::pluck('id')->toArray();
       $user = User::pluck('id')->toArray();
         return [
             'id' => $this->faker->uuid,
