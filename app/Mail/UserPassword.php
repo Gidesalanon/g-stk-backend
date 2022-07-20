@@ -35,7 +35,7 @@ class UserPassword extends Mailable
      */
     public function build()
     {
-        return $this->from('paddsabenin@gmail.com')
+        return $this->from('jesuisjustevendeur@gmail.com')
         ->subject("Réinitialisation de mot de passe.") //
         ->view('emails.passwordReset');
     }

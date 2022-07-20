@@ -21,12 +21,6 @@ trait entreprisesFilter
                         ->orderByDesc('name');
     }
 
-    public function website_link(Builder $builder, $value)
-    {
-        return $builder->where('website_link', 'like', '%'.$value.'%')
-                        ->orderByDesc('website_link');
-    }
-    
     public function presentation(Builder $builder, $value)
     {
         return $builder->where('presentation', 'like', '%'.$value.'%')

@@ -2,20 +2,20 @@
 
 namespace Database\Factories;
 
-use App\Models\Media;
-use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Product;
+use App\Models\CategorieProduct;
 use App\Models\User;
-use App\Models\Module;
 use App\Models\Fichier;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-class MediaFactory extends Factory
+class ProductFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Media::class;
+    protected $model = Product::class;
 
     /**
      * Define the model's default state.
@@ -24,16 +24,17 @@ class MediaFactory extends Factory
      */
     public function definition()
     {
-        $user = User::pluck('id')->toArray();
-        $module = Module::pluck('id')->toArray();
+      $user = User::pluck('id')->toArray();
+      $categorie = CategorieProduct::pluck('id')->toArray();
         return [
-            'title' => $this->faker->title(),
             'id' => $this->faker->uuid,
+            'name' => $this->faker->title,
             'public' => $this->faker->numberBetween(0, 1),
-            'deleted' => $this->faker->numberBetween(0, 1),
+            'description' => $this->faker->text,
+            'expiration_date' => $this->faker->date,
             'fichier_id' =>  Fichier::factory(),
             'user_id' => $this->faker->randomElement($user),
-            'module_id' => $this->faker->randomElement($module),
+            'categorie_id' => $this->faker->randomElement($categorie),
             'created_at' => now(),
             'updated_at' => now(),
         ];

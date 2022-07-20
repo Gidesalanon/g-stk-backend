@@ -101,15 +101,7 @@
                                                                                         style="font-size: 0px;"><a
                                                                                             target="_blank"><img
                                                                                                 class="adapt-img"
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                                                                                src="https://stpcnos.agriculture.gouv.bj/assets/images/logo.png"
-=======
-                                                                                                src="https://fnda.agriculture.gouv.bj/assets/images/Logo-FNDA-BENIN.jpg"
->>>>>>> 336256f2cbf54cb6852f9e27423bcdce2518b9a8
-=======
                                                                                                 src=`{{$logo}}`
->>>>>>> 2045765704bb2eaf179d17c2d854f03e8942b8be
                                                                                                 alt
                                                                                                 style="display: block;"
                                                                                                 width="200"></a></td>
@@ -176,18 +168,8 @@
 
                                                                                         </div>
                                                                                         <div class="site-link"><a
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                                                                                href="sgm.agriculture.gouv.bj"
-                                                                                                style="font-size:1.2rem;color:#fff">Conseil National d’Orientation et de Suivi du Secteur Agricole (CNOS)</a>
-=======
-                                                                                                href="fnda.agriculture.gouv.bj"
-                                                                                                style="font-size:1.2rem;color:#fff">Fond National de Développement Agricole</a>
->>>>>>> 336256f2cbf54cb6852f9e27423bcdce2518b9a8
-=======
                                                                                                 href=`{{$lien}}`
                                                                                                 style="font-size:1.2rem;color:#fff">{{$nom}}</a>
->>>>>>> 2045765704bb2eaf179d17c2d854f03e8942b8be
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
@@ -219,15 +201,7 @@
                                                                                              &nbsp;{{ $contact['email'] }}.<br>
                                                                                               Téléphone</strong> : {{ $contact['telephone'] }}&nbsp;<br><br><span
                                                                                                 style="font-size:16px;">©
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                                                                                Conseil National d’Orientation et de Suivi du Secteur Agricole (CNOS)
-=======
-                                                                                                Fond National de Développement Agricole
->>>>>>> 336256f2cbf54cb6852f9e27423bcdce2518b9a8
-=======
                                                                                                 {{$nom}}
->>>>>>> 2045765704bb2eaf179d17c2d854f03e8942b8be
                                                                                                 - 2021</span></p>
                                                                                     </td>
                                                                                 </tr>

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Api\Entreprise;
+namespace App\Http\Requests\Api\CategorieProduct;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateEntrepriseRequest extends FormRequest
+class UpdateCategorieProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,9 +26,10 @@ class UpdateEntrepriseRequest extends FormRequest
         return [
             'name' => ['nullable', 'string', 'min:2', 'max:255'],
             'fichier' => ['nullable', 'file'],
-            'presentation' => ['nullable', 'string'],
+            'description' => ['nullable', 'string'],
+            'expiration_date' => ['nullable', 'date'],
+            'quantity' => ['nullable', 'integer'],
             'public' => [ 'boolean'],
-            'deleted' => [ 'boolean'],
         ];
     }
 }

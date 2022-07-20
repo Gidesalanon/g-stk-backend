@@ -79,7 +79,7 @@ window.onload = function() {
     operationsSorter: {!! isset($operationsSorter) ? '"' . $operationsSorter . '"' : 'null' !!},
     configUrl: {!! isset($configUrl) ? '"' . $configUrl . '"' : 'null' !!},
     validatorUrl: {!! isset($validatorUrl) ? '"' . $validatorUrl . '"' : 'null' !!},
-    oauth2RedirectUrl: "{{ route('l5-swagger.'.$documentation.'.oauth2_callback') }}",
+    oauth2RedirectUrl: "{{ route('l5-swagger.'.$documentation.'.oauth2_callback', [], $useAbsolutePath) }}",
 
     requestInterceptor: function(request) {
       request.headers['X-CSRF-TOKEN'] = '{{ csrf_token() }}';
@@ -95,8 +95,12 @@ window.onload = function() {
       SwaggerUIBundle.plugins.DownloadUrl
     ],
 
-    layout: "StandaloneLayout"
-  })
+    layout: "StandaloneLayout",
+    docExpansion : "{!! config('l5-swagger.defaults.ui.display.doc_expansion', 'none') !!}",
+    filter: {!! config('l5-swagger.defaults.ui.display.filter') ? 'true' : 'false' !!},
+    persistAuthorization: "{!! config('l5-swagger.defaults.ui.authorization.persist_authorization') ? 'true' : 'false' !!}",
+
+    })
 
   window.ui = ui
 }
