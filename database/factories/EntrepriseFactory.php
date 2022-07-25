@@ -27,7 +27,7 @@ class EntrepriseFactory extends Factory
       $user = User::pluck('id')->toArray();
         return [
             'id' => $this->faker->uuid,
-            'name' => $this->faker->title,
+            'name' => $this->faker->company,
             'public' => $this->faker->numberBetween(0, 1),
             'presentation' => $this->faker->text,
             'fichier_id' =>  Fichier::factory(),

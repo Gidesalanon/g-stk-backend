@@ -213,7 +213,7 @@ class ProductController extends Controller
     public function update(UpdateProductRequest $request, Product $product)
     {
         //$this->authorize('update', Product::class);
-
+dd($request);
         $product = $this->productService->update($product, $request->validated());
 
         return new ProductResource($product);

@@ -26,7 +26,7 @@ class CategorieProductFactory extends Factory
       $user = User::pluck('id')->toArray();
         return [
             'id' => $this->faker->uuid,
-            'name' => $this->faker->title,
+            'name' => $this->faker->name,
             'public' => $this->faker->numberBetween(0, 1),
             'description' => $this->faker->text,
             'fichier_id' =>  Fichier::factory(),

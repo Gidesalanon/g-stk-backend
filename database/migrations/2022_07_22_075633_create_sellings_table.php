@@ -6,6 +6,13 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateSellingsTable extends Migration
 {
+    
+    /**
+     * Schema table name to migrate
+     * @var string
+     */
+    public $tableName = 'product_selling';
+
     /**
      * Run the migrations.
      *
@@ -18,13 +25,11 @@ class CreateSellingsTable extends Migration
             $table->uuid('id')->primary();
             $table->integer('qty');
             $table->longText('description');
-            $table->uuid('fichier_id')->nullable();
             $table->uuid('product_id')->nullable();
             $table->unsignedTinyInteger('public')->default('0');
             $table->uuid('user_id');
             $table->nullableTimestamps();
 
-            $table->index(["fichier_id"], 'fk_selling_fichier_idx');
 
             $table->index(["user_id"], 'fk_selling_user_idx');
 
@@ -36,10 +41,6 @@ class CreateSellingsTable extends Migration
                 ->references('id')->on('products')
                 ->onDelete('no action')
                 ->onUpdate('no action');
-            $table->foreign('fichier_id', 'fk_selling_fichier_idx')
-                ->references('id')->on('fichiers')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
         });
     }
 

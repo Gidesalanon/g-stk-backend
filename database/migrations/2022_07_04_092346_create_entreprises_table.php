@@ -23,7 +23,7 @@ class CreateEntreprisesTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->uuid('id')->primary();
-            $table->string('name', 255);
+            $table->string('name', 255)->unique();
             $table->uuid('fichier_id')->nullable();
             $table->longText('presentation');
             $table->unsignedTinyInteger('public')->default('0');
