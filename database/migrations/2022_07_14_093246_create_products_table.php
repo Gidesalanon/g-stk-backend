@@ -23,8 +23,8 @@ class CreateProductsTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->uuid('id')->primary();
-            $table->string('name', 255);
             $table->integer('quantity');
+            $table->string('name', 255)->unique();
             $table->date('expiration_date');
             $table->longText('description');
             $table->uuid('fichier_id')->nullable();
