@@ -68,6 +68,7 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
         Route::apiResource('produits', ProductController::class);
         
         Route::apiResource('settings', SettingController::class);
+        Route::apiResource('sellings', SellingController::class);
         
         Route::apiResource('applications', ApplicationController::class)->middleware('client');
 

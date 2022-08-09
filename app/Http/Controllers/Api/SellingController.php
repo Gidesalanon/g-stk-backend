@@ -11,7 +11,6 @@ use App\Models\Selling;
 use \App\Http\Requests\Api\Selling\StoreSellingRequest;
 use \App\Http\Requests\Api\Selling\UpdateSellingRequest;
 use App\Http\Resources\Selling as SellingResource;
-use App\Services\ProductService;
 use eloquentFilter\QueryFilter\ModelFilters\ModelFilters;
 use eloquentFilter\QueryFilter\ModelFilters\Filterable;
 
