@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Models\Product;
+use App\Services\SellingService;
 use App\Models\User;
-use \App\Http\Requests\Api\Product\StoreProductRequest;
-use \App\Http\Requests\Api\Product\UpdateProductRequest;
-use App\Http\Resources\Product as ProductResource;
+use App\Models\Selling;
+use \App\Http\Requests\Api\Selling\StoreSellingRequest;
+use \App\Http\Requests\Api\Selling\UpdateSellingRequest;
+use App\Http\Resources\Selling as SellingResource;
 use App\Services\ProductService;
 use eloquentFilter\QueryFilter\ModelFilters\ModelFilters;
 use eloquentFilter\QueryFilter\ModelFilters\Filterable;
@@ -21,9 +22,22 @@ class SellingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    
+    private $sellingService;
+
+    public function __construct(SellingService $sellingService)
     {
-        //
+        $this->sellingService = $sellingService;
+    }
+    
+    public function index(Request $request)
+    {
+        $load = ['users', 'products', 'fichier'];
+        $sellings = Selling::with($load)
+                    ->orderByDesc('created_at')
+                    ->filter(array_filter($request->all(),function($k){return $k!="page";},ARRAY_FILTER_USE_KEY))
+                    ->paginate(9);
+        return $sellings;
     }
 
     /**
@@ -42,9 +56,13 @@ class SellingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+
+    public function store(StoreSellingRequest $request)
     {
-        //
+       // $this->authorize('create', Product::class);
+        $selling = $this->sellingService->create($request->validated());
+        $selling->load(['users', 'products', 'fichier']);
+        return new SellingResource($selling);
     }
 
     /**
@@ -53,9 +71,13 @@ class SellingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+
+    public function show($id, Request $request)
     {
-        //
+      //  $this->authorize('view', Product::class);
+        $load = ['users', 'products'];
+            $selling = Selling::findOrFail($id)->load($load);
+            return new SellingResource($selling);
     }
 
     /**
@@ -76,9 +98,14 @@ class SellingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+
+    public function update(UpdateSellingRequest $request, Selling $selling)
     {
-        //
+        //$this->authorize('update', Product::class);
+
+        $selling = $this->sellingService->update($selling, $request->validated());
+
+        return new SellingResource($selling);
     }
 
     /**
@@ -87,8 +114,20 @@ class SellingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Selling $selling)
     {
-        //
+      //  $this->authorize('delete', Product::class);
+
+        if ($this->sellingService->delete($selling)) {
+            return response()->json([
+                'status' => 'success',
+                'status_code' => Response::HTTP_NO_CONTENT,
+                'message' => 'Deleted successful'
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Failed deleting resource'
+            ], 400);
+        }
     }
 }
