@@ -106,7 +106,7 @@ class CategorieProductController extends Controller
     {
        // $this->authorize('create', CategorieProduct::class);
         $categorieProduct = $this->categorieProductService->create($request->validated());
-        $categorieProduct->load(['users', 'fichier']);
+        $categorieProduct->load(['fichier']);
         return new CategorieProductResource($categorieProduct);
     }
 
@@ -154,7 +154,7 @@ class CategorieProductController extends Controller
     public function show($id, Request $request)
     {
       //  $this->authorize('view', CategorieProduct::class);
-        $load = ['users'];
+        $load = ['fichier'];
             $categorieProduct = CategorieProduct::findOrFail($id)->load($load);
             return new CategorieProductResource($categorieProduct);
     }

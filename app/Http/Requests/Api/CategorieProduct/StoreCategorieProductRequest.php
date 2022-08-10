@@ -25,8 +25,8 @@ class StoreCategorieProductRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'min:2',],
-            'fichier' => ['required', 'file'],
             'description' => ['nullable', 'string'],
+            'fichier' => ['required', 'file'],
             'public' => [ 'boolean'],
         ];
     }

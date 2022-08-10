@@ -24,20 +24,12 @@ class CreateCategorieProductsTable extends Migration
             $table->engine = 'InnoDB';
             $table->uuid('id')->primary();
             $table->string('name', 255)->unique();
-            $table->uuid('fichier_id')->nullable();
             $table->longText('description');
+            $table->uuid('fichier_id')->nullable();
             $table->unsignedTinyInteger('public')->default('0');
-            $table->uuid('user_id');
             $table->nullableTimestamps();
 
             $table->index(["fichier_id"], 'fk_product_fichier1_idx');
-
-            $table->index(["user_id"], 'fk_product_user1_idx');
-
-            $table->foreign('user_id', 'fk_product_user1_idx')
-                ->references('id')->on('users')
-                ->onDelete('no action')
-                ->onUpdate('no action');
             $table->foreign('fichier_id', 'fk_product_fichier1_idx')
                 ->references('id')->on('fichiers')
                 ->onDelete('cascade')
