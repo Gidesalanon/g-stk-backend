@@ -19,6 +19,7 @@ use App\Http\Controllers\Api\FichiersController;
 use App\Http\Controllers\Api\SettingController;
 use App\Http\Controllers\Api\SearchController;
 use App\Http\Controllers\Api\RoleController;
+use App\Http\Controllers\Api\SellingController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
