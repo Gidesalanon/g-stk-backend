@@ -12,7 +12,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\EntrepriseController;
 use App\Http\Controllers\Api\CategorieProductController;
 use App\Http\Controllers\Api\ProductController;
-use App\Http\Controllers\Api\DocumentationController;
+/* use App\Http\Controllers\Api\DocumentationController; */
 use App\Http\Controllers\Api\DefaultController;
 use App\Http\Controllers\Api\ApplicationController;
 use App\Http\Controllers\Api\FichiersController;
