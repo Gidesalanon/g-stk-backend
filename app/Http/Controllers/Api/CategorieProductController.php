@@ -96,11 +96,11 @@ class CategorieProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CategorieProduct $categorieProduct)
+    public function destroy($categorieProduct)
     {
       //  $this->authorize('delete', CategorieProduct::class);
 
-        if ($this->categorieProductService->delete($categorieProduct)) {
+        if (CategorieProduct::where('id', $categorieProduct)->delete()) {
             return response()->json([
                 'status' => 'success',
                 'status_code' => Response::HTTP_NO_CONTENT,
