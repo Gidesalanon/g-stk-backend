@@ -18,11 +18,6 @@ class CategorieProduct extends Model
     private static $whiteListFilter = ['*'];
     protected $guarded = [];
 
-    public function users()
-    {
-        return $this->belongsTo(User::class, 'user_id')->select(['id', 'username', 'email']);
-    }
-
     public function delete($removeFile = true)
     {
         // if ($removeFile) {

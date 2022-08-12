@@ -12,13 +12,14 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\EntrepriseController;
 use App\Http\Controllers\Api\CategorieProductController;
 use App\Http\Controllers\Api\ProductController;
-use App\Http\Controllers\Api\DocumentationController;
+/* use App\Http\Controllers\Api\DocumentationController; */
 use App\Http\Controllers\Api\DefaultController;
 use App\Http\Controllers\Api\ApplicationController;
 use App\Http\Controllers\Api\FichiersController;
 use App\Http\Controllers\Api\SettingController;
 use App\Http\Controllers\Api\SearchController;
 use App\Http\Controllers\Api\RoleController;
+use App\Http\Controllers\Api\SellingController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -68,6 +69,7 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
         Route::apiResource('produits', ProductController::class);
         
         Route::apiResource('settings', SettingController::class);
+        Route::apiResource('sellings', SellingController::class);
         
         Route::apiResource('applications', ApplicationController::class)->middleware('client');
 

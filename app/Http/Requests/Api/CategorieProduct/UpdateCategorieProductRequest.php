@@ -25,8 +25,8 @@ class UpdateCategorieProductRequest extends FormRequest
     {
         return [
             'name' => ['nullable', 'string', 'min:2', 'max:255'],
-            'fichier' => ['nullable', 'file'],
             'description' => ['nullable', 'string'],
+            'fichier' => ['nullable', 'file'],
             'public' => [ 'boolean'],
             'deleted' => [ 'boolean'],
         ];
