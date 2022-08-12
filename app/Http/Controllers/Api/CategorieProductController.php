@@ -12,6 +12,7 @@ use App\Http\Resources\CategorieProduct as CategorieProductResource;
 use App\Services\CategorieProductService;
 use eloquentFilter\QueryFilter\ModelFilters\ModelFilters;
 use eloquentFilter\QueryFilter\ModelFilters\Filterable;
+use Illuminate\Support\Arr;
 
 class CategorieProductController extends Controller
 {
@@ -26,28 +27,6 @@ class CategorieProductController extends Controller
         $this->categorieProductService = $categorieProductService;
     }
 
-    /**
-     * @OA\Get(
-     *      path="api/categorieProducts",
-     *      operationId="getCategorieProductsList",
-     *      tags={"CategorieProducts"},
-     *      summary="Get list of categorieProducts",
-     *      description="Returns list of categorieProducts",
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *          @OA\JsonContent(ref="#/components/schemas/CategorieProductResource")
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden"
-     *      )
-     *     )
-     */
     /**
      * Display a listing of the resource.
      *
@@ -65,37 +44,6 @@ class CategorieProductController extends Controller
 
     }
 
-
-    /**
-     * @OA\Post(
-     *      path="api/categorieProducts",
-     *      operationId="storeCategorieProduct",
-     *      tags={"CategorieProducts"},
-     *      summary="Store new categorieProduct",
-     *      description="Returns categorieProduct data",
-     *      @OA\RequestBody(
-     *          required=true,
-     *          @OA\JsonContent(ref="#/components/schemas/StoreCategorieProductRequest")
-     *      ),
-     *      @OA\Response(
-     *          response=201,
-     *          description="Successful operation",
-     *          @OA\JsonContent(ref="#/components/schemas/CategorieProduct")
-     *       ),
-     *      @OA\Response(
-     *          response=400,
-     *          description="Bad Request"
-     *      ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden"
-     *      )
-     * )
-     */
     /**
      * Store a newly created resource in storage.
      *
@@ -106,45 +54,10 @@ class CategorieProductController extends Controller
     {
        // $this->authorize('create', CategorieProduct::class);
         $categorieProduct = $this->categorieProductService->create($request->validated());
-        $categorieProduct->load(['users', 'fichier']);
+        $categorieProduct->load(['fichier']);
         return new CategorieProductResource($categorieProduct);
     }
 
-    /**
-     * @OA\Get(
-     *      path="api/categorieProducts/{id}",
-     *      operationId="getCategorieProductById",
-     *      tags={"CategorieProducts"},
-     *      summary="Get categorieProduct information",
-     *      description="Returns categorieProduct data",
-     *      @OA\Parameter(
-     *          name="id",
-     *          description="CategorieProduct id",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="integer"
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *          @OA\JsonContent(ref="#/components/schemas/CategorieProduct")
-     *       ),
-     *      @OA\Response(
-     *          response=400,
-     *          description="Bad Request"
-     *      ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden"
-     *      )
-     * )
-     */
     /**
      * Display the specified resource.
      *
@@ -154,55 +67,11 @@ class CategorieProductController extends Controller
     public function show($id, Request $request)
     {
       //  $this->authorize('view', CategorieProduct::class);
-        $load = ['users'];
+        $load = ['fichier'];
             $categorieProduct = CategorieProduct::findOrFail($id)->load($load);
             return new CategorieProductResource($categorieProduct);
     }
 
-
-    /**
-     * @OA\Put(
-     *      path="api/categorieProducts/{id}",
-     *      operationId="updateCategorieProduct",
-     *      tags={"CategorieProducts"},
-     *      summary="Update existing categorieProduct",
-     *      description="Returns updated categorieProduct data",
-     *      @OA\Parameter(
-     *          name="id",
-     *          description="CategorieProduct id",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="integer"
-     *          )
-     *      ),
-     *      @OA\RequestBody(
-     *          required=true,
-     *          @OA\JsonContent(ref="#/components/schemas/UpdateCategorieProductRequest")
-     *      ),
-     *      @OA\Response(
-     *          response=202,
-     *          description="Successful operation",
-     *          @OA\JsonContent(ref="#/components/schemas/CategorieProduct")
-     *       ),
-     *      @OA\Response(
-     *          response=400,
-     *          description="Bad Request"
-     *      ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden"
-     *      ),
-     *      @OA\Response(
-     *          response=404,
-     *          description="Resource Not Found"
-     *      )
-     * )
-     */
     /**
      * Update the specified resource in storage.
      *
@@ -210,50 +79,17 @@ class CategorieProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCategorieProductRequest $request, CategorieProduct $categorieProduct)
+    public function update(UpdateCategorieProductRequest $request, $categorieProduct)
     {
+        $data = Arr::only($request->input(), ['name', 'description', 'public','user_id']);
         //$this->authorize('update', CategorieProduct::class);
+        $categorieProduct = CategorieProduct::where('id', $categorieProduct)->update($data);
+        // $categorieProduct = $this->categorieProductService->update($categorieProduct, $request->validated());
 
-        $categorieProduct = $this->categorieProductService->update($categorieProduct, $request->validated());
-
-        return new CategorieProductResource($categorieProduct);
+        // return new CategorieProductResource($categorieProduct);
+        return true;
     }
 
-    /**
-     * @OA\Delete(
-     *      path="api/categorieProducts/{id}",
-     *      operationId="deleteCategorieProduct",
-     *      tags={"CategorieProducts"},
-     *      summary="Delete existing categorieProduct",
-     *      description="Deletes a record and returns no content",
-     *      @OA\Parameter(
-     *          name="id",
-     *          description="CategorieProduct id",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="integer"
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=204,
-     *          description="Successful operation",
-     *          @OA\JsonContent()
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden"
-     *      ),
-     *      @OA\Response(
-     *          response=404,
-     *          description="Resource Not Found"
-     *      )
-     * )
-     */
     /**
      * Remove the specified resource from storage.
      *
