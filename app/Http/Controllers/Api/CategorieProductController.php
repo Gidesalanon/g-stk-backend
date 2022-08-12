@@ -12,7 +12,7 @@ use App\Http\Resources\CategorieProduct as CategorieProductResource;
 use App\Services\CategorieProductService;
 use eloquentFilter\QueryFilter\ModelFilters\ModelFilters;
 use eloquentFilter\QueryFilter\ModelFilters\Filterable;
-use Illuminate\Support\Arr;
+use Illuminate\Support\Arr; 
 
 class CategorieProductController extends Controller
 {
