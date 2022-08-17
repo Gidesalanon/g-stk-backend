@@ -27,6 +27,11 @@ class CategorieProduct extends Model
         return parent::delete();
     }
 
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'user_id')->select(['id', 'username', 'email']);
+    }
+
     public function fichier()
     {
         return $this->belongsTo(Fichier::class, 'fichier_id')->select(['id', 'filename']);;
