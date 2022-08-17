@@ -25,8 +25,11 @@ class CreateProductsTable extends Migration
             $table->uuid('id')->primary();
             $table->integer('quantity');
             $table->string('name', 255)->unique();
+            $table->double('client_price');
+            $table->double('partner_price');
+            $table->double('point')->default('0');
             $table->date('expiration_date');
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->uuid('fichier_id')->nullable();
             $table->uuid('categorie_id')->nullable();
             $table->unsignedTinyInteger('public')->default('0');
