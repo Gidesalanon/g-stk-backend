@@ -27,28 +27,6 @@ class ProductController extends Controller
     }
 
     /**
-     * @OA\Get(
-     *      path="api/products",
-     *      operationId="getProductsList",
-     *      tags={"Products"},
-     *      summary="Get list of products",
-     *      description="Returns list of products",
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *          @OA\JsonContent(ref="#/components/schemas/ProductResource")
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden"
-     *      )
-     *     )
-     */
-    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -65,37 +43,6 @@ class ProductController extends Controller
 
     }
 
-
-    /**
-     * @OA\Post(
-     *      path="api/products",
-     *      operationId="storeProduct",
-     *      tags={"Products"},
-     *      summary="Store new product",
-     *      description="Returns product data",
-     *      @OA\RequestBody(
-     *          required=true,
-     *          @OA\JsonContent(ref="#/components/schemas/StoreProductRequest")
-     *      ),
-     *      @OA\Response(
-     *          response=201,
-     *          description="Successful operation",
-     *          @OA\JsonContent(ref="#/components/schemas/Product")
-     *       ),
-     *      @OA\Response(
-     *          response=400,
-     *          description="Bad Request"
-     *      ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden"
-     *      )
-     * )
-     */
     /**
      * Store a newly created resource in storage.
      *
@@ -111,41 +58,6 @@ class ProductController extends Controller
     }
 
     /**
-     * @OA\Get(
-     *      path="api/products/{id}",
-     *      operationId="getProductById",
-     *      tags={"Products"},
-     *      summary="Get product information",
-     *      description="Returns product data",
-     *      @OA\Parameter(
-     *          name="id",
-     *          description="Product id",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="integer"
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *          @OA\JsonContent(ref="#/components/schemas/Product")
-     *       ),
-     *      @OA\Response(
-     *          response=400,
-     *          description="Bad Request"
-     *      ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden"
-     *      )
-     * )
-     */
-    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -159,50 +71,6 @@ class ProductController extends Controller
             return new ProductResource($product);
     }
 
-
-    /**
-     * @OA\Put(
-     *      path="api/products/{id}",
-     *      operationId="updateProduct",
-     *      tags={"Products"},
-     *      summary="Update existing product",
-     *      description="Returns updated product data",
-     *      @OA\Parameter(
-     *          name="id",
-     *          description="Product id",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="integer"
-     *          )
-     *      ),
-     *      @OA\RequestBody(
-     *          required=true,
-     *          @OA\JsonContent(ref="#/components/schemas/UpdateProductRequest")
-     *      ),
-     *      @OA\Response(
-     *          response=202,
-     *          description="Successful operation",
-     *          @OA\JsonContent(ref="#/components/schemas/Product")
-     *       ),
-     *      @OA\Response(
-     *          response=400,
-     *          description="Bad Request"
-     *      ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden"
-     *      ),
-     *      @OA\Response(
-     *          response=404,
-     *          description="Resource Not Found"
-     *      )
-     * )
-     */
     /**
      * Update the specified resource in storage.
      *
@@ -210,59 +78,26 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProductRequest $request, Product $product)
+    public function update(UpdateProductRequest $request, $id)
     {
+        $product = Product::findOrFail($id);
         //$this->authorize('update', Product::class);
-dd($request);
+
         $product = $this->productService->update($product, $request->validated());
 
         return new ProductResource($product);
     }
 
     /**
-     * @OA\Delete(
-     *      path="api/products/{id}",
-     *      operationId="deleteProduct",
-     *      tags={"Products"},
-     *      summary="Delete existing product",
-     *      description="Deletes a record and returns no content",
-     *      @OA\Parameter(
-     *          name="id",
-     *          description="Product id",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="integer"
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=204,
-     *          description="Successful operation",
-     *          @OA\JsonContent()
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden"
-     *      ),
-     *      @OA\Response(
-     *          response=404,
-     *          description="Resource Not Found"
-     *      )
-     * )
-     */
-    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-      //  $this->authorize('delete', Product::class);
+        $product = Product::findOrFail($id);
+        //  $this->authorize('delete', Product::class);
 
         if ($this->productService->delete($product)) {
             return response()->json([

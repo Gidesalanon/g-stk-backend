@@ -27,28 +27,6 @@ class EntrepriseController extends Controller
     }
 
     /**
-     * @OA\Get(
-     *      path="api/entreprises",
-     *      operationId="getEntreprisesList",
-     *      tags={"Entreprises"},
-     *      summary="Get list of entreprises",
-     *      description="Returns list of entreprises",
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *          @OA\JsonContent(ref="#/components/schemas/EntrepriseResource")
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden"
-     *      )
-     *     )
-     */
-    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -65,37 +43,6 @@ class EntrepriseController extends Controller
 
     }
 
-
-    /**
-     * @OA\Post(
-     *      path="api/entreprises",
-     *      operationId="storeEntreprise",
-     *      tags={"Entreprises"},
-     *      summary="Store new entreprise",
-     *      description="Returns entreprise data",
-     *      @OA\RequestBody(
-     *          required=true,
-     *          @OA\JsonContent(ref="#/components/schemas/StoreEntrepriseRequest")
-     *      ),
-     *      @OA\Response(
-     *          response=201,
-     *          description="Successful operation",
-     *          @OA\JsonContent(ref="#/components/schemas/Entreprise")
-     *       ),
-     *      @OA\Response(
-     *          response=400,
-     *          description="Bad Request"
-     *      ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden"
-     *      )
-     * )
-     */
     /**
      * Store a newly created resource in storage.
      *
@@ -111,41 +58,6 @@ class EntrepriseController extends Controller
     }
 
     /**
-     * @OA\Get(
-     *      path="api/entreprises/{id}",
-     *      operationId="getEntrepriseById",
-     *      tags={"Entreprises"},
-     *      summary="Get entreprise information",
-     *      description="Returns entreprise data",
-     *      @OA\Parameter(
-     *          name="id",
-     *          description="Entreprise id",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="integer"
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *          @OA\JsonContent(ref="#/components/schemas/Entreprise")
-     *       ),
-     *      @OA\Response(
-     *          response=400,
-     *          description="Bad Request"
-     *      ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden"
-     *      )
-     * )
-     */
-    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -159,50 +71,6 @@ class EntrepriseController extends Controller
             return new EntrepriseResource($entreprise);
     }
 
-
-    /**
-     * @OA\Put(
-     *      path="api/entreprises/{id}",
-     *      operationId="updateEntreprise",
-     *      tags={"Entreprises"},
-     *      summary="Update existing entreprise",
-     *      description="Returns updated entreprise data",
-     *      @OA\Parameter(
-     *          name="id",
-     *          description="Entreprise id",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="integer"
-     *          )
-     *      ),
-     *      @OA\RequestBody(
-     *          required=true,
-     *          @OA\JsonContent(ref="#/components/schemas/UpdateEntrepriseRequest")
-     *      ),
-     *      @OA\Response(
-     *          response=202,
-     *          description="Successful operation",
-     *          @OA\JsonContent(ref="#/components/schemas/Entreprise")
-     *       ),
-     *      @OA\Response(
-     *          response=400,
-     *          description="Bad Request"
-     *      ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden"
-     *      ),
-     *      @OA\Response(
-     *          response=404,
-     *          description="Resource Not Found"
-     *      )
-     * )
-     */
     /**
      * Update the specified resource in storage.
      *
@@ -219,41 +87,6 @@ class EntrepriseController extends Controller
         return new EntrepriseResource($entreprise);
     }
 
-    /**
-     * @OA\Delete(
-     *      path="api/entreprises/{id}",
-     *      operationId="deleteEntreprise",
-     *      tags={"Entreprises"},
-     *      summary="Delete existing entreprise",
-     *      description="Deletes a record and returns no content",
-     *      @OA\Parameter(
-     *          name="id",
-     *          description="Entreprise id",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="integer"
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=204,
-     *          description="Successful operation",
-     *          @OA\JsonContent()
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden"
-     *      ),
-     *      @OA\Response(
-     *          response=404,
-     *          description="Resource Not Found"
-     *      )
-     * )
-     */
     /**
      * Remove the specified resource from storage.
      *

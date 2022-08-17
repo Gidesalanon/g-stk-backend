@@ -27,9 +27,16 @@ class CreateCategorieProductsTable extends Migration
             $table->longText('description');
             $table->uuid('fichier_id')->nullable();
             $table->unsignedTinyInteger('public')->default('0');
+            $table->uuid('user_id');
             $table->nullableTimestamps();
 
+            $table->index(["user_id"], 'fk_product_user1_idx');
             $table->index(["fichier_id"], 'fk_product_fichier1_idx');
+            
+            $table->foreign('user_id', 'fk_product_user1_idx')
+                ->references('id')->on('users')
+                ->onDelete('no action')
+                ->onUpdate('no action');
             $table->foreign('fichier_id', 'fk_product_fichier1_idx')
                 ->references('id')->on('fichiers')
                 ->onDelete('cascade')
