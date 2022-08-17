@@ -8,6 +8,7 @@ use Illuminate\Http\Response;
 use App\Services\SellingService;
 use App\Models\User;
 use App\Models\Selling;
+use App\Models\CategorieProduct;
 use \App\Http\Requests\Api\Selling\StoreSellingRequest;
 use \App\Http\Requests\Api\Selling\UpdateSellingRequest;
 use App\Http\Resources\Selling as SellingResource;
@@ -60,7 +61,7 @@ class SellingController extends Controller
     {
        // $this->authorize('create', Product::class);
         $selling = $this->sellingService->create($request->validated());
-        $selling->load(['users', 'products', 'fichier']);
+        $selling->load(['users', 'fichier', 'products']);
         return new SellingResource($selling);
     }
 
@@ -74,7 +75,7 @@ class SellingController extends Controller
     public function show($id, Request $request)
     {
       //  $this->authorize('view', Product::class);
-        $load = ['users', 'products'];
+        $load = ['users', 'products', 'fichier'];
             $selling = Selling::findOrFail($id)->load($load);
             return new SellingResource($selling);
     }
@@ -98,8 +99,9 @@ class SellingController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function update(UpdateSellingRequest $request, Selling $selling)
+    public function update(UpdateSellingRequest $request, $id)
     {
+        $selling = Selling::findOrFail($id);
         //$this->authorize('update', Product::class);
 
         $selling = $this->sellingService->update($selling, $request->validated());
@@ -113,9 +115,10 @@ class SellingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Selling $selling)
+    public function destroy($id)
     {
-      //  $this->authorize('delete', Product::class);
+        $selling = Selling::findOrFail($id);
+        //  $this->authorize('delete', Product::class);
 
         if ($this->sellingService->delete($selling)) {
             return response()->json([
