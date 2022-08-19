@@ -6,13 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateSellingsTable extends Migration
 {
-    
-    /**
-     * Schema table name to migrate
-     * @var string
-     */
-    public $tableName = 'product_selling';
-
     /**
      * Run the migrations.
      *
@@ -20,7 +13,7 @@ class CreateSellingsTable extends Migration
      */
     public function up()
     {
-        Schema::create($this->tableName, function (Blueprint $table) {
+        Schema::create('sellings', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->uuid('id')->primary();
             $table->integer('qty');
@@ -51,6 +44,6 @@ class CreateSellingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists($this->tableName);
+        Schema::dropIfExists('sellings');
     }
 }
