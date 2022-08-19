@@ -24,7 +24,9 @@ class UpdateSellingRequest extends FormRequest
     public function rules()
     {
         return [
-            'quantity' => ['nullable', 'integer'],
+            'quantity' => ['required', 'integer'],
+            'montant' => ['required', 'integer'],
+            'type_price' => ['required', 'string'],
             'description' => ['nullable', 'string'],
             'product_id' => ['required'],
             'user_id' => ['required'],

@@ -17,12 +17,13 @@ class CreateSellingsTable extends Migration
             $table->engine = 'InnoDB';
             $table->uuid('id')->primary();
             $table->integer('qty');
+            $table->integer('montant');
+            $table->string('type_price');
             $table->longText('description');
             $table->uuid('product_id')->nullable();
             $table->unsignedTinyInteger('public')->default('0');
             $table->uuid('user_id');
             $table->nullableTimestamps();
-
 
             $table->index(["user_id"], 'fk_selling_user_idx');
 
