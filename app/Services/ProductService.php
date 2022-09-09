@@ -30,10 +30,10 @@ class ProductService
 
     public function create(array $data)
     {
-        $fichier = $this->productFileUploadService->save($data['fichier']);
+        if (!empty($data['fichier'])) $fichier = $this->productFileUploadService->save($data['fichier']);
 
         $productData = Arr::only($data, ['name', 'description', 'public', 'partner_price', 'client_price', 'point', 'expiration_date', 'user_id']);
-        $productData['fichier_id'] = $fichier->id;
+        if (!empty($data['fichier'])) $productData['fichier_id'] = $fichier->id;
         $product = Product::create(array_merge($productData, [
             'user_id' => Auth::user()->id,
             'id' => (string) Str::uuid()

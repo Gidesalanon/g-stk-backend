@@ -6,6 +6,7 @@
 /vendor
 .env
 *.lock
+*.zip
 .env.backup
 .env.stage
 .phpunit.result.cache

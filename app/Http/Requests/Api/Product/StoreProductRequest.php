@@ -25,7 +25,7 @@ class StoreProductRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'min:2',],
-            'fichier' => ['required', 'file'],
+            'fichier' => ['nullable', 'file'],
             'description' => ['nullable', 'string'],
             'expiration_date' => ['nullable', 'date'],
             'quantity' => ['nullable', 'integer'],

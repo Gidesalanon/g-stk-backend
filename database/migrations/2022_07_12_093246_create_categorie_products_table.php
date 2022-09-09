@@ -24,7 +24,7 @@ class CreateCategorieProductsTable extends Migration
             $table->engine = 'InnoDB';
             $table->uuid('id')->primary();
             $table->string('name', 255)->unique();
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->uuid('fichier_id')->nullable();
             $table->unsignedTinyInteger('public')->default('0');
             $table->uuid('user_id');

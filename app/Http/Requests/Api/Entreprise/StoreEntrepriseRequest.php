@@ -25,7 +25,7 @@ class StoreEntrepriseRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'min:2',],
-            'fichier' => ['required', 'file'],
+            'fichier' => ['nullable', 'file'],
             'presentation' => ['nullable', 'string'],
             'public' => [ 'boolean'],
         ];
