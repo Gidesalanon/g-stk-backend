@@ -5,19 +5,19 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Services\SellingService;
+use App\Services\CommandService;
 use App\Models\User;
-use App\Models\Selling;
-use App\Models\SellingProduct;
+use App\Models\Command;
+use App\Models\CommandProduct;
 use App\Models\CategorieProduct;
-use \App\Http\Requests\Api\Selling\StoreSellingRequest;
-use \App\Http\Requests\Api\Selling\UpdateSellingRequest;
-use App\Http\Resources\Selling as SellingResource;
+use \App\Http\Requests\Api\Command\StoreCommandRequest;
+use \App\Http\Requests\Api\Command\UpdateCommandRequest;
+use App\Http\Resources\Command as CommandResource;
 use eloquentFilter\QueryFilter\ModelFilters\ModelFilters;
 use eloquentFilter\QueryFilter\ModelFilters\Filterable;
 use Illuminate\Support\Facades\Auth;
 
-class SellingController extends Controller
+class CommandController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,21 +25,21 @@ class SellingController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-    private $sellingService;
+    private $commandService;
 
-    public function __construct(SellingService $sellingService)
+    public function __construct(CommandService $commandService)
     {
-        $this->sellingService = $sellingService;
+        $this->commandService = $commandService;
     }
     
     public function index(Request $request)
     {
-        $load = ['users', 'fichier', 'selling_products'];
-        $sellings = Selling::with($load)
+        $load = ['users', 'fichier', 'command_products'];
+        $commands = Command::with($load)
                     ->orderByDesc('created_at')
                     ->filter(array_filter($request->all(),function($k){return $k!="page";},ARRAY_FILTER_USE_KEY))
                     ->paginate(15);
-        return $sellings;
+        return $commands;
     }
 
     /**
@@ -59,27 +59,27 @@ class SellingController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function store(StoreSellingRequest $request)
+    public function store(StoreCommandRequest $request)
     {
         // dd($request->all());
        // $this->authorize('create', Product::class);
 
-        $orderId = $this->sellingService->create([
+        $orderId = $this->commandService->create([
             'description' => $request->description,
         ])->id;
 
         // dd($orderId);
         foreach ($request->products as $key => $value) {
-            SellingProduct::create([
+            CommandProduct::create([
                 'expiration_date' => $value['expiration_date']??'',
                 'quantity' => $value['quantity']??'',
                 'product_id' => $value['product_id']??'',
-                'selling_id' => $orderId,
+                'command_id' => $orderId,
             ])->id;
         }
 
         return response()->json([
-            'message' => 'Success selling'
+            'message' => 'Success command'
         ], 200);
     }
 
@@ -94,8 +94,8 @@ class SellingController extends Controller
     {
       //  $this->authorize('view', Product::class);
         $load = ['users', 'fichier'];
-            $selling = Selling::findOrFail($id)->load($load);
-            return new SellingResource($selling);
+            $command = Command::findOrFail($id)->load($load);
+            return new CommandResource($command);
     }
 
     /**
@@ -117,14 +117,14 @@ class SellingController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function update(UpdateSellingRequest $request, $id)
+    public function update(UpdateCommandRequest $request, $id)
     {
-        $selling = Selling::findOrFail($id);
+        $command = Command::findOrFail($id);
         //$this->authorize('update', Product::class);
 
-        $selling = $this->sellingService->update($selling, $request->validated());
+        $command = $this->commandService->update($command, $request->validated());
 
-        return new SellingResource($selling);
+        return new CommandResource($command);
     }
 
     /**
@@ -135,10 +135,10 @@ class SellingController extends Controller
      */
     public function destroy($id)
     {
-        $selling = Selling::findOrFail($id);
+        $command = Command::findOrFail($id);
         //  $this->authorize('delete', Product::class);
 
-        if ($this->sellingService->delete($selling)) {
+        if ($this->commandService->delete($command)) {
             return response()->json([
                 'status' => 'success',
                 'status_code' => Response::HTTP_NO_CONTENT,
