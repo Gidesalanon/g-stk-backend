@@ -57,7 +57,7 @@ class SellingController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function store(StoreSellingRequest $request)
+    public function store(StoreSellingRequest $request) 
     {
        // $this->authorize('create', Product::class);
         $selling = $this->sellingService->create($request->validated());
