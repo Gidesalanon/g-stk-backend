@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\DefaultController;
 use App\Http\Controllers\Api\ApplicationController;
 use App\Http\Controllers\Api\FichiersController;
 use App\Http\Controllers\Api\SettingController;
+use App\Http\Controllers\Api\CommandController;
 use App\Http\Controllers\Api\SearchController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\SellingController;
