@@ -24,14 +24,9 @@ class StoreSellingRequest extends FormRequest
     public function rules()
     {
         return [
-            'quantity' => ['required', 'integer'],
-            'montant' => ['required', 'integer'],
-            'type_price' => ['required', 'string'],
             'description' => ['nullable', 'string'],
-            'product_id' => ['required'],
-            'user_id' => ['required'],
-            'fichier' => ['required', 'file'],
-            'public' => [ 'boolean'],
+            'products' => ['required'],
+            'public' => [ 'nullable', 'boolean'],
         ];
     }
 }

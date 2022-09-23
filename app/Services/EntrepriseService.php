@@ -30,10 +30,10 @@ class EntrepriseService
 
     public function create(array $data)
     {
-        $fichier = $this->logoService->save($data['fichier']);
+        if (!empty($data['fichier'])) $fichier = $this->logoService->save($data['fichier']);
 
         $entrepriseData = Arr::only($data, ['name', 'presentation', 'public']);
-        $entrepriseData['fichier_id'] = $fichier->id;
+        if (!empty($data['fichier'])) $entrepriseData['fichier_id'] = $fichier->id;
         $entreprise = Entreprise::create(array_merge($entrepriseData, [
             'user_id' => Auth::user()->id,
             'id' => (string) Str::uuid()

@@ -24,22 +24,22 @@ class ProductFactory extends Factory
      */
     public function definition()
     {
-      $user = User::pluck('id')->toArray();
-      $categorie = CategorieProduct::pluck('id')->toArray();
-        return [
-            'id' => $this->faker->uuid,
-            'name' => $this->faker->name,
-            'public' => $this->faker->numberBetween(0, 1),
-            'point' => $this->faker->numberBetween(0, 100),
-            'partner_price' => $this->faker->numberBetween(0, 100000),
-            'client_price' => $this->faker->numberBetween(0, 1000000),
-            'description' => $this->faker->text,
-            'expiration_date' => $this->faker->date,
-            'fichier_id' =>  Fichier::factory(),
-            'user_id' => $this->faker->randomElement($user),
-            'categorie_id' => $this->faker->randomElement($categorie),
-            'created_at' => now(),
-            'updated_at' => now(),
-        ];
+    //   $user = User::pluck('id')->toArray();
+    //   $categorie = CategorieProduct::pluck('id')->toArray();
+    //     return [
+    //         'id' => $this->faker->uuid,
+    //         'name' => $this->faker->name,
+    //         'public' => $this->faker->numberBetween(0, 1),
+    //         'point' => $this->faker->numberBetween(0, 100),
+    //         'partner_price' => $this->faker->numberBetween(0, 100000),
+    //         'client_price' => $this->faker->numberBetween(0, 1000000),
+    //         'description' => $this->faker->text,
+    //         'expiration_date' => $this->faker->date,
+    //         'fichier_id' =>  Fichier::factory(),
+    //         'user_id' => $this->faker->randomElement($user),
+    //         'categorie_id' => $this->faker->randomElement($categorie),
+    //         'created_at' => now(),
+    //         'updated_at' => now(),
+    //     ];
     }
 }

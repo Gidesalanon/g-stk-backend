@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use eloquentFilter\QueryFilter\ModelFilters\Filterable;
 use App\Filters\SellingsFilter;
 
-class Selling extends Model
+class SellingProduct extends Model
 {
     public $timestamps = true;
     use HasFactory;
@@ -18,14 +18,14 @@ class Selling extends Model
     private static $whiteListFilter = ['*'];
     protected $guarded = [];
 
-    public function users()
+    public function sellings()
     {
-        return $this->belongsTo(User::class, 'user_id')->select(['id', 'username', 'email']);
+        return $this->belongsTo(Selling::class, 'selling_id')->select(['id', 'description', 'selling_id']);
     }
 
-    public function selling_products()
+    public function products()
     {
-        return $this->hasMany(SellingProduct::class);
+        return $this->belongsTo(Product::class, 'product_id')->select(['id', 'description', 'product_id']);
     }
 
     public function delete($removeFile = true)

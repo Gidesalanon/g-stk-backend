@@ -34,13 +34,24 @@ class ProductController extends Controller
     public function index(Request $request)
     {
        // $this->authorize('view_any', Product::class);
-        $load = ['users' ,'fichier'];
+        $load = ['users' ,'categories','fichier'];
         $products = Product::with($load)
                     ->orderByDesc('created_at')
                     ->filter(array_filter($request->all(),function($k){return $k!="page";},ARRAY_FILTER_USE_KEY))
-                    ->paginate(9);
+                    ->paginate(15);
         return $products;
 
+    }
+
+    public function index_all(Request $request)
+    {
+        // $this->authorize('view_any', Product::class);
+        $load = ['users' ,'categories','fichier'];
+        $products = Product::with($load)
+                    ->orderByDesc('created_at')
+                    ->filter(array_filter($request->all(),function($k){return $k!="page";},ARRAY_FILTER_USE_KEY))
+                    ->paginate(1500);
+        return $products;
     }
 
     /**

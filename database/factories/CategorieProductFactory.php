@@ -23,16 +23,16 @@ class CategorieProductFactory extends Factory
      */
     public function definition()
     {
-      $user = User::pluck('id')->toArray();
-        return [
-            'id' => $this->faker->uuid,
-            'name' => $this->faker->name,
-            'public' => $this->faker->numberBetween(0, 1),
-            'description' => $this->faker->text,
-            'fichier_id' =>  Fichier::factory(),
-            'user_id' => $this->faker->randomElement($user),
-            'created_at' => now(),
-            'updated_at' => now(),
-        ];
+    //   $user = User::pluck('id')->toArray();
+    //     return [
+    //         'id' => $this->faker->uuid,
+    //         'name' => $this->faker->name,
+    //         'public' => $this->faker->numberBetween(0, 1),
+    //         'description' => $this->faker->text,
+    //         'fichier_id' =>  Fichier::factory(),
+    //         'user_id' => $this->faker->randomElement($user),
+    //         'created_at' => now(),
+    //         'updated_at' => now(),
+    //     ];
     }
 }

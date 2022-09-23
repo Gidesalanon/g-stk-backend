@@ -28,7 +28,6 @@ class UpdateCategorieProductRequest extends FormRequest
             'description' => ['nullable', 'string'],
             'fichier' => ['nullable', 'file'],
             'public' => [ 'boolean'],
-            'deleted' => [ 'boolean'],
         ];
     }
 }

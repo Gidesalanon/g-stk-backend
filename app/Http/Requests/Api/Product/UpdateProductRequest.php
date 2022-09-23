@@ -28,10 +28,10 @@ class UpdateProductRequest extends FormRequest
             'fichier' => ['nullable', 'file'],
             'description' => ['nullable', 'string'],
             'expiration_date' => ['nullable', 'date'],
-            'quantity' => ['nullable', 'integer'],
-            'point' => ['nullable', 'integer'],
-            'client_price' => ['nullable', 'integer'],
-            'partner_price' => ['nullable', 'integer'],
+            'quantity' => ['nullable', 'numeric'],
+            'point' => ['nullable', 'numeric'],
+            'client_price' => ['nullable', 'numeric'],
+            'partner_price' => ['nullable', 'numeric'],
             'public' => [ 'boolean'],
         ];
     }

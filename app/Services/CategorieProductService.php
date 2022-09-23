@@ -30,10 +30,10 @@ class CategorieProductService
 
     public function create(array $data)
     {
-        $fichier = $this->categorieProductFileUploadService->save($data['fichier']);
+        if (!empty($data['fichier'])) $fichier = $this->categorieProductFileUploadService->save($data['fichier']);
 
         $categorieProductData = Arr::only($data, ['name', 'description', 'public']);
-        $categorieProductData['fichier_id'] = $fichier->id;
+        if (!empty($data['fichier'])) $categorieProductData['fichier_id'] = $fichier->id;
         $categorieProduct = CategorieProduct::create(array_merge($categorieProductData, [
             'user_id' => Auth::user()->id,
             'id' => (string) Str::uuid()

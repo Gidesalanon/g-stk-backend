@@ -67,15 +67,18 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
         Route::apiResource('entreprises', EntrepriseController::class);
         Route::apiResource('categorie_produits', CategorieProductController::class);
         Route::apiResource('produits', ProductController::class);
-        
+
         Route::apiResource('settings', SettingController::class);
         Route::apiResource('sellings', SellingController::class);
+        Route::apiResource('commands', CommandController::class);
+        Route::apiResource('clients', ClientController::class);
         
         Route::apiResource('applications', ApplicationController::class)->middleware('client');
 
     });
 });
 
+    Route::get('/products_all', [ProductController::class, 'index_all']);
 
     Route::resource('applications', ApplicationController::class)->only([
         'index', 'show'
