@@ -30,6 +30,7 @@ class CreateProductsTable extends Migration
             $table->longText('description')->nullable();
             $table->uuid('fichier_id')->nullable();
             $table->uuid('categorie_id')->nullable();
+            $table->integer('expiration_mail_days')->nullable();
             $table->unsignedTinyInteger('public')->default('0');
             $table->uuid('user_id');
             $table->nullableTimestamps();

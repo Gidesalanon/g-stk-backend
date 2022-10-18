@@ -110,14 +110,14 @@ class ProductSeeder extends Seeder
             'updated_at' => now(),
         ]);
         $product = Product::firstOrCreate([
-            'name' => 'Pâtte Artemisin',
+            'name' => 'Pâte Artemisin',
           ], [
             'id' => (string) Str::uuid(),
             'categorie_id' => $categorie->id,
             'point' => 2,
             'partner_price' => 3500,
             'client_price' => 4000,
-            'description' => 'Pâtte Artemisin (200g)',
+            'description' => 'Pâte Artemisin (200g)',
             'fichier_id' => null,
             'user_id' => $user[0],
             'public' => 1,
@@ -125,14 +125,14 @@ class ProductSeeder extends Seeder
             'updated_at' => now(),
         ]);
         $product = Product::firstOrCreate([
-            'name' => 'Pâtte Dentifrice (200g)',
+            'name' => 'Pâte Dentifrice (200g)',
           ], [
             'id' => (string) Str::uuid(),
             'categorie_id' => $categorie->id,
             'point' => 3.5,
             'partner_price' => 3000,
             'client_price' => 3500,
-            'description' => 'Pâtte Dentifrice au Thé Blanc (200g)',
+            'description' => 'Pâte Dentifrice au Thé Blanc (200g)',
             'fichier_id' => null,
             'user_id' => $user[0],
             'public' => 1,
@@ -140,14 +140,14 @@ class ProductSeeder extends Seeder
             'updated_at' => now(),
         ]);
         $product = Product::firstOrCreate([
-            'name' => 'Pâtte Dentifrice (100g)',
+            'name' => 'Pâte Dentifrice (100g)',
           ], [
             'id' => (string) Str::uuid(),
             'categorie_id' => $categorie->id,
             'point' => 1.2,
             'partner_price' => 1700,
             'client_price' => 2000,
-            'description' => 'Pâtte Dentifrice au Thé Blanc (100g)',
+            'description' => 'Pâte Dentifrice au Thé Blanc (100g)',
             'fichier_id' => null,
             'user_id' => $user[0],
             'public' => 1,

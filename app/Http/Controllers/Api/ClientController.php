@@ -34,7 +34,7 @@ class ClientController extends Controller
     public function index(Request $request)
     {
        // $this->authorize('view_any', Client::class);
-        $load = ['users' ,'fichier'];
+        $load = ['users' ,'commandes'];
         $clients = Client::with($load)
                     ->orderByDesc('created_at')
                     ->filter(array_filter($request->all(),function($k){return $k!="page";},ARRAY_FILTER_USE_KEY))
@@ -53,7 +53,7 @@ class ClientController extends Controller
     {
        // $this->authorize('create', Client::class);
         $client = $this->clientService->create($request->validated());
-        $client->load(['users', 'fichier']);
+        $client->load(['users', 'commandes']);
         return new ClientResource($client);
     }
 

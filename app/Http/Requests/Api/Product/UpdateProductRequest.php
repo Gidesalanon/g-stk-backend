@@ -32,6 +32,7 @@ class UpdateProductRequest extends FormRequest
             'point' => ['nullable', 'numeric'],
             'client_price' => ['nullable', 'numeric'],
             'partner_price' => ['nullable', 'numeric'],
+            'expiration_mail_days' => ['nullable', 'numeric'],
             'public' => [ 'boolean'],
         ];
     }

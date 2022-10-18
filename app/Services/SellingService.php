@@ -14,26 +14,9 @@ use Illuminate\Support\Str;
 
 class SellingService
 {
-    /**
-     * @var LogoService
-     */
-    private $logoService;
-
-    /**
-     *  constructor.
-     * @param LogoService $logoService
-     */
-    public function __construct(LogoService $logoService)
-    {
-        $this->logoService = $logoService;
-    }
-
     public function create(array $data)
     {
-        if (!empty($data['fichier'])) $fichier = $this->logoService->save($data['fichier']);
-
-        $sellingData = Arr::only($data, [ 'description', 'public' ]);
-        if (!empty($data['fichier'])) $sellingData['fichier_id'] = $fichier->id;
+        $sellingData = Arr::only($data, [ 'description', 'client_id', 'public' ]);
         $selling = Selling::create(array_merge($sellingData, [
             'user_id' => Auth::user()->id,
             'id' => (string) Str::uuid()
@@ -44,11 +27,7 @@ class SellingService
 
     public function update(Selling $selling, array $data)
     {
-        $sellingData = Arr::only($data, [ 'description', 'public' ]);
-
-        if (!empty($data['fichier'])) {
-            $this->logoService->replace($data['fichier'], $selling->fichier);
-        }
+        $sellingData = Arr::only($data, [ 'description', 'client_id', 'public' ]);
 
         $selling->update($sellingData);
 

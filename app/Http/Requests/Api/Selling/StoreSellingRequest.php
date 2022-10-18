@@ -25,6 +25,7 @@ class StoreSellingRequest extends FormRequest
     {
         return [
             'description' => ['nullable', 'string'],
+            'client_id' => ['nullable', 'string'],
             'products' => ['required'],
             'public' => [ 'nullable', 'boolean'],
         ];

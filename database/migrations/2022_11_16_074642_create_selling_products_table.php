@@ -26,8 +26,8 @@ class CreateSellingProductsTable extends Migration
 
             $table->foreign('selling_id', 'fk_selling_selling_idx')
                 ->references('id')->on('sellings')
-                ->onDelete('no action')
-                ->onUpdate('no action');
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->foreign('product_id', 'fk_selling_product_idx')
                 ->references('id')->on('products')
                 ->onDelete('no action')

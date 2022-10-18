@@ -23,9 +23,9 @@ class Command extends Model
         return $this->belongsTo(User::class, 'user_id')->select(['id', 'username', 'email']);
     }
 
-    public function selling_products()
+    public function command_products()
     {
-        return $this->hasMany(SellingProduct::class);
+        return $this->hasMany(CommandProduct::class);
     }
 
     public function delete($removeFile = true)

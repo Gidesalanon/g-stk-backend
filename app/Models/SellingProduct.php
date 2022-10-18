@@ -23,22 +23,4 @@ class SellingProduct extends Model
         return $this->belongsTo(Selling::class, 'selling_id')->select(['id', 'description', 'selling_id']);
     }
 
-    public function products()
-    {
-        return $this->belongsTo(Product::class, 'product_id')->select(['id', 'description', 'product_id']);
-    }
-
-    public function delete($removeFile = true)
-    {
-        // if ($removeFile) {
-        //     $this->fichier->delete();
-        // }
-
-        return parent::delete();
-    }
-
-    public function fichier()
-    {
-        return $this->belongsTo(Fichier::class, 'fichier_id')->select(['id', 'filename']);;
-    }
 }

@@ -26,8 +26,8 @@ class CreateCommandProductsTable extends Migration
 
             $table->foreign('command_id', 'fk_command_command_idx')
                 ->references('id')->on('commands')
-                ->onDelete('no action')
-                ->onUpdate('no action');
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->foreign('product_id', 'fk_command_product_idx')
                 ->references('id')->on('products')
                 ->onDelete('no action')

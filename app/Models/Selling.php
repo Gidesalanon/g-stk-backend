@@ -28,17 +28,9 @@ class Selling extends Model
         return $this->hasMany(SellingProduct::class);
     }
 
-    public function delete($removeFile = true)
+    public function clients()
     {
-        // if ($removeFile) {
-        //     $this->fichier->delete();
-        // }
-
-        return parent::delete();
+        return $this->belongsTo(Client::class, 'client_id')->select(['id', 'description', 'firstname','lastname','phone','email']);
     }
 
-    public function fichier()
-    {
-        return $this->belongsTo(Fichier::class, 'fichier_id')->select(['id', 'filename']);;
-    }
 }

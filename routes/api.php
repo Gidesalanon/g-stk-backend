@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\Auth\ForgotPasswordController;
 use App\Http\Controllers\Api\Auth\ResetPasswordController;
 use App\Http\Controllers\Api\Auth\VerificationController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\ClientController;
 use App\Http\Controllers\Api\EntrepriseController;
 use App\Http\Controllers\Api\CategorieProductController;
 use App\Http\Controllers\Api\ProductController;

@@ -32,7 +32,7 @@ class ProductService
     {
         if (!empty($data['fichier'])) $fichier = $this->productFileUploadService->save($data['fichier']);
 
-        $productData = Arr::only($data, ['name', 'description', 'public', 'partner_price', 'client_price', 'point', 'expiration_date', 'user_id']);
+        $productData = Arr::only($data, ['name', 'description', 'public', 'partner_price', 'client_price', 'point', 'expiration_date', 'expiration_mail_days', 'user_id']);
         if (!empty($data['fichier'])) $productData['fichier_id'] = $fichier->id;
         $product = Product::create(array_merge($productData, [
             'user_id' => Auth::user()->id,
@@ -44,7 +44,7 @@ class ProductService
 
     public function update(Product $product, array $data)
     {
-        $productData = Arr::only($data, ['name', 'description', 'public', 'partner_price', 'client_price', 'point', 'expiration_date', 'user_id']);
+        $productData = Arr::only($data, ['name', 'description', 'public', 'partner_price', 'client_price', 'point', 'expiration_date', 'expiration_mail_days', 'user_id']);
 
         if (!empty($data['fichier'])) {
             $this->productFileUploadService->replace($data['fichier'], $product->fichier);

@@ -34,7 +34,7 @@ class SellingController extends Controller
     
     public function index(Request $request)
     {
-        $load = ['users', 'fichier', 'selling_products'];
+        $load = ['users', 'selling_products','clients'];
         $sellings = Selling::with($load)
                     ->orderByDesc('created_at')
                     ->filter(array_filter($request->all(),function($k){return $k!="page";},ARRAY_FILTER_USE_KEY))
@@ -61,17 +61,16 @@ class SellingController extends Controller
 
     public function store(StoreSellingRequest $request) 
     {
-        // dd($request->all());
        // $this->authorize('create', Product::class);
 
         $orderId = $this->sellingService->create([
             'description' => $request->description,
+            'client_id' => $request->client_id,
+            'public' => $request->public,
         ])->id;
 
-        // dd($orderId);
         foreach ($request->products as $key => $value) {
             SellingProduct::create([
-                'expiration_date' => $value['expiration_date']??'',
                 'quantity' => $value['quantity']??'',
                 'product_id' => $value['product_id']??'',
                 'selling_id' => $orderId,
@@ -93,7 +92,7 @@ class SellingController extends Controller
     public function show($id, Request $request)
     {
       //  $this->authorize('view', Product::class);
-        $load = ['users', 'fichier'];
+        $load = ['users', 'selling_products'];
             $selling = Selling::findOrFail($id)->load($load);
             return new SellingResource($selling);
     }
