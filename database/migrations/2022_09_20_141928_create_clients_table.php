@@ -22,7 +22,7 @@ class CreateClientsTable extends Migration
             $table->string('ifu', 255)->nullable();
             $table->string('firstname', 100);
             $table->string('lastname', 100);
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->uuid('user_id');
             $table->unsignedTinyInteger('public')->default('0');
             $table->nullableTimestamps();
